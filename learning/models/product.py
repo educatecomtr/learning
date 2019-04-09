@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 
 
 class Product(models.Model):
-
     # id = models.AutoField(primary_key=True)
     name = models.CharField(verbose_name='Ürün İsmi', max_length=200)
     content = models.TextField(verbose_name='Ürün Açıklaması')
