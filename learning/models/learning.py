@@ -29,7 +29,7 @@ class Product(models.Model):
     name = models.CharField(verbose_name='Ürün İsmi', max_length=200)
     content = models.TextField(verbose_name='Ürün Açıklaması')
     created = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products', related_query_name='product')
     slug = models.SlugField(unique=True, editable=False)
     active = models.BooleanField(default=True)
 
@@ -44,7 +44,7 @@ class Product(models.Model):
     def get_absolute_url(self):
         return "/product/%i/" % self.id
 
-    def save(self):
+    def save(self, force_insert=False, force_update=False, using=None):
         if not self.id:
             self.slug = slugify(self.name)
 

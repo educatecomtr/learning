@@ -37,11 +37,11 @@ class Book(models.Model):
 
 class Comment(models.Model):
     comment_id = models.AutoField(primary_key=True)
-    content = models.TextField()
+    comment_content = models.TextField()
 
 
 class Intro(Book, Comment):
-    content = models.TextField()
+    intro_comment = models.TextField()
 
 
 class NewManager(models.Manager):
