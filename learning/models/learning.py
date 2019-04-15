@@ -29,7 +29,7 @@ class Product(models.Model):
     name = models.CharField(verbose_name='Ürün İsmi', max_length=200)
     content = models.TextField(verbose_name='Ürün Açıklaması')
     created = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products', related_query_name='product')
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='products', related_query_name='product')
     slug = models.SlugField(unique=True, editable=False)
     active = models.BooleanField(default=True)
 
@@ -72,6 +72,5 @@ class Product(models.Model):
     @staticmethod
     def static_summary(content):
         return content[:50]
-
 
 
