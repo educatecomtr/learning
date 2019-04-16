@@ -7,3 +7,4 @@ class LearningMeta(models.Model):
         abstract = True
         app_label = 'learning'
         db_table = 'table_name'
+        managed = False
