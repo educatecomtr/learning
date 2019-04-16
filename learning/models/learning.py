@@ -9,6 +9,7 @@ class ProductManager(models.Manager):
         return self.filter(active=1)
 
 
+
 class ActiveProductManager(models.Manager):
     def get_queryset(self):
         return super().get_queryset().filter(active=1)
@@ -72,5 +73,7 @@ class Product(models.Model):
     @staticmethod
     def static_summary(content):
         return content[:50]
+
+
 
 

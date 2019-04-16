@@ -14,4 +14,8 @@ class UserDetail(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
-    product = models.ManyToManyField(Product, related_name='categories', related_query_name='category')
+    products = models.ManyToManyField(Product, related_name='categories', related_query_name='category')
+
+
+
+
