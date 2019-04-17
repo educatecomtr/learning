@@ -18,5 +18,3 @@ class Category(models.Model):
 
 
 
-
-

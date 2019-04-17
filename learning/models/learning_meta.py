@@ -8,3 +8,4 @@ class LearningMeta(models.Model):
         app_label = 'learning'
         db_table = 'table_name'
         managed = False
+
