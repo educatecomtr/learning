@@ -9,3 +9,14 @@ class LearningMeta(models.Model):
         db_table = 'table_name'
         managed = False
 
+
+
+
+
+
+
+
+
+
+
+
