@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ürün Arşiv Sayfası</title>
+</head>
+<body>
+Bu sayfa {{ year }} / {{ month }} için ürün arşiv sayfasıdır.
+<br>
+
+
+{%  if products %}
+    <table>
+        {% for product in products %}
+        <tr>
+            <td><a href="{% url 'product-detail' product.id %}">Ürün Adı : {{ product.name | upper }}</a></td>
+            <td>Ürün Açıklaması : {{ product.content }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    Ürün bulunamadı
+{% endif %}
+
+2019 / 5. ay arşivleri için <a href="{% url 'product-archive' 2019 5 %}">tıklayın</a>
+<br>
+
+Ürün listesi için <a href="{% url 'product-list'%}">tıklayın</a>
+</body>
+</html>

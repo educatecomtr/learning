@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ürün Listeleme Sayfası</title>
+</head>
+<body>
+
+Bu sayfa ürün listeleme sayfasıdır.
+
+<table>
+    {% for product in products %}
+    <tr>
+        <td>Ürün Adı : {{ product.name | upper }}</td>
+        <td>Ürün Açıklaması : {{ product.content }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

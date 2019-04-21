@@ -14,9 +14,3 @@ class LearningMeta(models.Model):
 
 
 
-
-
-
-
-
-

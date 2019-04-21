@@ -7,10 +7,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        UserDetail.objects.delete()
-        User.objects.delete()
-        Product.objects.delete()
-        Category.objects.delete()
 
         User.objects.bulk_create([
             User(id=1, username='admin'),
@@ -21,11 +17,11 @@ class Command(BaseCommand):
         ])
 
         UserDetail.objects.bulk_create([
-            UserDetail(user_id=1, username='address 1'),
-            UserDetail(user_id=2, username='address 2'),
-            UserDetail(user_id=3, username='address 3'),
-            UserDetail(user_id=4, username='address 4'),
-            UserDetail(user_id=5, username='address 5')
+            UserDetail(user_id=1, address='address 1'),
+            UserDetail(user_id=2, address='address 2'),
+            UserDetail(user_id=3, address='address 3'),
+            UserDetail(user_id=4, address='address 4'),
+            UserDetail(user_id=5, address='address 5')
         ])
 
         Product.objects.bulk_create([
