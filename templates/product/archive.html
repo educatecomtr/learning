@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Ürün Arşiv Sayfası</title>
-</head>
-<body>
+{%  extends 'layout/base.html' %}
+
+{% block title %}
+Ürün Listeleme Sayfası
+{% endblock %}
+
+{%  block content %}
+
 Bu sayfa {{ year }} / {{ month }} için ürün arşiv sayfasıdır.
 <br>
 
@@ -26,5 +27,4 @@ Bu sayfa {{ year }} / {{ month }} için ürün arşiv sayfasıdır.
 <br>
 
 Ürün listesi için <a href="{% url 'product-list'%}">tıklayın</a>
-</body>
-</html>
+{% endblock %}

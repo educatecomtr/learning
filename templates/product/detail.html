@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Ürün Detay Sayfası</title>
-</head>
-<body>
+{%  extends 'layout/base.html' %}
 
+{% block title %}
+Ürün Detay Sayfası
+{% endblock %}
+
+{%  block content %}
 <table>
     <tr>
         <td>Ürün adı : </td>
@@ -17,5 +16,4 @@
         <td>{{ product.content }}</td>
     </tr>
 </table>
-</body>
-</html>
+{% endblock %}
