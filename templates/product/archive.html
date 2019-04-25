@@ -4,12 +4,23 @@
 Ürün Listeleme Sayfası
 {% endblock %}
 
+{% block top %}
+  <div class="jumbotron">
+    <div class="container">
+
+      <h1 class="display-3">Ürün Arşivi!</h1>
+      <p>
+          Bu sayfa {{ year }} / {{ month }} için ürün arşiv sayfasıdır.
+      </p>
+
+        <p><a class="btn btn-primary btn-lg" href="{% url 'product-list'%}" role="button">ÜRÜN LİSTESİ &raquo;</a></p>
+
+    </div>
+  </div>
+
+{% endblock %}
+
 {%  block content %}
-
-Bu sayfa {{ year }} / {{ month }} için ürün arşiv sayfasıdır.
-<br>
-
-
 {%  if products %}
     <table>
         {% for product in products %}
@@ -23,8 +34,5 @@ Bu sayfa {{ year }} / {{ month }} için ürün arşiv sayfasıdır.
     Ürün bulunamadı
 {% endif %}
 
-2019 / 5. ay arşivleri için <a href="{% url 'product-archive' 2019 5 %}">tıklayın</a>
-<br>
 
-Ürün listesi için <a href="{% url 'product-list'%}">tıklayın</a>
 {% endblock %}

@@ -1,17 +1,30 @@
 {%  extends 'layout/base.html' %}
 
+{% block top %}
+  <div class="jumbotron">
+    <div class="container">
+
+      <h1 class="display-3">Ürünler!</h1>
+      <p>
+          Bu sayfadan ürünlerimize göz atabilirsiniz.
+      </p>
+
+
+    </div>
+  </div>
+
+{% endblock %}
+
 {% block title %}
 Ürün Listeleme Sayfası
 {% endblock %}
 
 {%  block content %}
 
-Bu sayfa ürün listeleme sayfasıdır.
-
 <table>
     {% for product in products %}
     <tr>
-        <td>Ürün Adı : {{ product.name | upper }}</td>
+        <td><a href="{% url 'product-detail' product.id %}">Ürün Adı : {{ product.name | upper }}</a></td>
         <td>Ürün Açıklaması : {{ product.content }}</td>
     </tr>
     {% endfor %}
