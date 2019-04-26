@@ -4,16 +4,20 @@
 Ürün Detay Sayfası
 {% endblock %}
 
-{%  block content %}
-<table>
-    <tr>
-        <td>Ürün adı : </td>
-        <td>{{ product.name }}</td>
-    </tr>
+{% block top %}
+  <div class="jumbotron">
+    <div class="container">
 
-    <tr>
-        <td>Ürün açıklaması : </td>
-        <td>{{ product.content }}</td>
-    </tr>
-</table>
+      <h1 class="display-3">{{ product.name }}</h1>
+      <p>
+          {{ product.content }}
+      </p>
+
+
+    </div>
+  </div>
+
+{% endblock %}
+
+{%  block content %}
 {% endblock %}
