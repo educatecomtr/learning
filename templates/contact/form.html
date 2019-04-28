@@ -1,0 +1,26 @@
+{%  extends 'layout/base.html' %}
+
+{% block title %}
+İletişim Formu
+{% endblock %}
+
+{% block top %}
+  <div class="jumbotron">
+    <div class="container">
+
+      <h1 class="display-3">İletişim!</h1>
+      <p>
+            Bu sayfadan bizimle iletişime geçebilirsiniz.
+      </p>
+    </div>
+  </div>
+{% endblock %}
+
+{%  block content %}
+
+<form method="post" action="">
+{% csrf_token %}
+{{ form.as_ul }}
+<input type="submit" value="Gönder">
+</form>
+{% endblock %}

@@ -21,9 +21,9 @@ class PassiveProductManager(models.Manager):
 
 class Product(models.Model):
 
-    objects = ProductManager()
-    actives = ActiveProductManager()
-    passives = PassiveProductManager()
+    # objects = ProductManager()
+    # actives = ActiveProductManager()
+    # passives = PassiveProductManager()
 
     # benzersiz_key = models.AutoField(primary_key=True)
     name = models.CharField(verbose_name='Ürün İsmi', max_length=200)

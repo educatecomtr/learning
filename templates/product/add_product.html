@@ -1,0 +1,24 @@
+{%  extends 'layout/base.html' %}
+
+{% block title %}
+Ürün Ekle
+{% endblock %}
+
+{% block top %}
+  <div class="jumbotron">
+    <div class="container">
+
+      <h1 class="display-3">Ürün Ekle!</h1>
+      <p>Ürün ekleme sayfasıdır. </p>
+    </div>
+  </div>
+{% endblock %}
+
+{%  block content %}
+
+<form method="post" action="">
+{% csrf_token %}
+{{ form.as_ul }}
+<input type="submit" value="Gönder">
+</form>
+{% endblock %}
