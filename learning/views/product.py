@@ -9,36 +9,6 @@ from learning.forms import ProductForm
 from django.http import HttpResponseRedirect
 
 
-def product_form(request):
-
-    if request.method == "POST":
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            p = form.save(commit=False)
-            p.save()
-            return HttpResponseRedirect('/learning/product/detail/%s/' % p.id)
-    else:
-        form = ProductForm()
-
-    return render(request=request, template_name='product/add_product.html', context={'form': form})
-
-
-def product_edit_form(request, pk=None):
-
-    if request.method == "POST":
-        instance = Product.objects.get(pk=pk)
-        form = ProductForm(request.POST, instance=instance)
-        if form.is_valid():
-            p = form.save(commit=False)
-            p.save()
-            return HttpResponseRedirect('/learning/product/detail/%s/' % pk)
-    else:
-        p = Product.objects.get(pk=pk)
-        form = ProductForm(instance=p)
-
-    return render(request=request, template_name='product/add_product.html', context={'form': form})
-
-
 class ProductListView(ListView):
     context_object_name = 'products'
     model = Product
@@ -73,6 +43,8 @@ class ProductView(View):
 '''
 FUNCTION BASED VIEWS
 '''
+
+
 def products(request):
 
     product_list = Product.objects.order_by('-name')[:5]
@@ -111,3 +83,31 @@ def product_archive(request, year=None, month=None):
     return render(request=request, template_name='product/archive.html', context=context)
 
 
+def product_form(request):
+
+    if request.method == "POST":
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            p = form.save(commit=False)
+            p.save()
+            return HttpResponseRedirect('/learning/product/detail/%s/' % p.id)
+    else:
+        form = ProductForm()
+
+    return render(request=request, template_name='product/add_product.html', context={'form': form})
+
+
+def product_edit_form(request, pk=None):
+
+    if request.method == "POST":
+        instance = Product.objects.get(pk=pk)
+        form = ProductForm(request.POST, instance=instance)
+        if form.is_valid():
+            p = form.save(commit=False)
+            p.save()
+            return HttpResponseRedirect('/learning/product/detail/%s/' % pk)
+    else:
+        p = Product.objects.get(pk=pk)
+        form = ProductForm(instance=p)
+
+    return render(request=request, template_name='product/add_product.html', context={'form': form})
