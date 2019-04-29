@@ -12,7 +12,7 @@ from django.http import HttpResponseRedirect
 class ProductListView(ListView):
     context_object_name = 'products'
     model = Product
-    template_name = 'product/list.html'
+    template_name = 'learning/product/list.html'
     queryset = Product.objects.order_by('-name')[:2]
     
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -24,7 +24,7 @@ class ProductListView(ListView):
 
 class ProductDetailView(DetailView):
     model = Product
-    template_name = 'product/detail.html'
+    template_name = 'learning/product/detail.html'
 
 
 class ProductView(View):
@@ -34,7 +34,7 @@ class ProductView(View):
             'products': self.get_queryset()
         }
 
-        return render(request=request, template_name='product/list.html', context=context)
+        return render(request=request, template_name='learning/product/list.html', context=context)
 
     def get_queryset(self):
         return Product.objects.order_by('-name')[:5]
@@ -53,7 +53,7 @@ def products(request):
         'products': product_list
     }
 
-    return render(request=request, template_name='product/list.html', context=context)
+    return render(request=request, template_name='learning/product/list.html', context=context)
 
 
 def product(request, pk=None):
@@ -63,10 +63,10 @@ def product(request, pk=None):
         context = {
             'product': product_detail
         }
-        return render(request=request, template_name='product/detail.html', context=context)
+        return render(request=request, template_name='learning/product/detail.html', context=context)
 
     except ObjectDoesNotExist:
-        return render(request=request, template_name='exceptions/notexists.html')
+        return render(request=request, template_name='learning/exceptions/notexists.html')
 
 
 @require_http_methods(["GET", "POST"])
@@ -80,7 +80,7 @@ def product_archive(request, year=None, month=None):
         'products': product_list,
     }
 
-    return render(request=request, template_name='product/archive.html', context=context)
+    return render(request=request, template_name='learning/product/archive.html', context=context)
 
 
 def product_form(request):
@@ -94,7 +94,7 @@ def product_form(request):
     else:
         form = ProductForm()
 
-    return render(request=request, template_name='product/add_product.html', context={'form': form})
+    return render(request=request, template_name='learning/product/add_product.html', context={'form': form})
 
 
 def product_edit_form(request, pk=None):
@@ -110,4 +110,4 @@ def product_edit_form(request, pk=None):
         p = Product.objects.get(pk=pk)
         form = ProductForm(instance=p)
 
-    return render(request=request, template_name='product/add_product.html', context={'form': form})
+    return render(request=request, template_name='learning/product/add_product.html', context={'form': form})

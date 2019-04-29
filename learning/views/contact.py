@@ -22,4 +22,4 @@ def contact_form(request):
     else:
         form = Contact()
 
-    return render(request=request, template_name='contact/form.html', context={'form': form})
+    return render(request=request, template_name='learning/contact/form.html', context={'form': form})
