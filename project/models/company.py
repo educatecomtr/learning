@@ -19,19 +19,3 @@ class Company(SlugMixin):
     def __str__(self):
         return self.name
 
-
-class Dealer(Company):
-    class Meta:
-        verbose_name = 'Bayi'
-        verbose_name_plural = 'Bayiler'
-
-
-class Distributor(Company):
-    dealers = models.ManyToManyField(Dealer, related_name='distributors', related_query_name='distributor', blank=True)
-
-    class Meta:
-        verbose_name = 'Distribütör'
-        verbose_name_plural = 'Distribütörler'
-
-
-
