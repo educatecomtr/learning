@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'learning',
+    'stocks.apps.StocksConfig',
     'project',
     'debug_toolbar',
 ]

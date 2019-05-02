@@ -20,7 +20,6 @@ class DealerRoleView(LoginRequiredMixin, View):
                 request.session['role_page'] = 'dealer'
                 request.session['role_id'] = pk
 
-
         context = {
             'dealer': dealer
         }

@@ -9,12 +9,13 @@
     </title>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/jumbotron.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 </head>
 <body>
 
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="navbar-brand" href="#">STOCKS PROJECT</a>
+  <a class="navbar-brand" href="{% url 'role-list' %}">STOCKS PROJECT</a>
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
@@ -46,7 +47,6 @@
   {%  endblock %}
 
   <div class="container">
-    <!-- Example row of columns -->
 
     {% block content  %}
     {%  endblock %}

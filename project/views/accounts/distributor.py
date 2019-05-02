@@ -1,6 +1,29 @@
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from project.models import Distributor
+from django.db.models import Q
+from django.shortcuts import render, redirect
 
 
 class DistributorRoleView(LoginRequiredMixin, View):
-    pass
+
+    def get(self, request, pk=None):
+
+        role_page = request.session.get('role_page', False)
+
+        if role_page == 'dealer':
+            distributor = Distributor.objects.get(pk=pk)
+        else:
+            distributor = Distributor.objects.filter((Q(author=request.user) | Q(staff=request.user)) & Q(id=pk))
+
+            if distributor:
+                request.session['role_page'] = 'distributor'
+                request.session['role_id'] = pk
+            else:
+                return redirect('role-list')
+
+        context = {
+            'distributor': distributor
+        }
+
+        return render(request=request, template_name='project/accounts/distributor.html', context=context)

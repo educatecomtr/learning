@@ -2,3 +2,11 @@
 body {
   padding-top: 3.5rem;
 }
+
+.my-card
+{
+    position:absolute;
+    left:40%;
+    top:-20px;
+    border-radius:50%;
+}

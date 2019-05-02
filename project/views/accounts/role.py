@@ -8,6 +8,9 @@ from django.db.models import Q
 class RoleView(LoginRequiredMixin, View):
 
     def get(self, request):
+        request.session['role_page'] = False
+        request.session['role_id'] = False
+
         dealers = Dealer.objects.filter(Q(author=request.user) | Q(staff=request.user))
         distributors = Distributor.objects.filter(Q(author=request.user) | Q(staff=request.user))
 
@@ -17,4 +20,5 @@ class RoleView(LoginRequiredMixin, View):
         }
 
         return render(request=request, template_name='project/accounts/role.html', context=context)
+
 

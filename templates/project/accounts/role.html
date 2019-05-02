@@ -7,7 +7,7 @@
         {% for distributor in distributors %}
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">{{ distributor.name }}</h5>
+                <h5 class="card-title"><a href="{% url 'distributor-home' distributor.pk %}">{{ distributor.name }}</a></h5>
             </div>
             <div class="card-footer">
               <small class="text-muted">
@@ -28,7 +28,7 @@
         {% for dealer in dealers %}
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">{{ dealer.name }}</h5>
+                <h5 class="card-title"><a href="{% url 'distributor-home' dealer.pk %}">{{ dealer.name }}</a></h5>
             </div>
             <div class="card-footer">
               <small class="text-muted">
