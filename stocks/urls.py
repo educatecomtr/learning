@@ -18,6 +18,7 @@ from django.urls import path, include
 import debug_toolbar
 from django.conf.urls.static import static
 from django.conf import settings
+from project import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +26,10 @@ urlpatterns = [
     path('learning/', include('learning.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
+
+    path('accounts/role/', views.RoleView.as_view(), name='role-list'),
+    path('accounts/dealer/<int:pk>/', views.DealerRoleView.as_view(), name='dealer-home'),
+    path('accounts/distributor/<int:pk>/', views.DistributorRoleView.as_view(), name='distributor-home'),
 ]
 
 if settings.DEBUG:
