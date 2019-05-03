@@ -3,6 +3,7 @@ from django.shortcuts import render
 from project.models import Dealer, Distributor
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from django.contrib.auth.models import User
 
 
 class RoleView(LoginRequiredMixin, View):
@@ -11,8 +12,8 @@ class RoleView(LoginRequiredMixin, View):
         request.session['role_page'] = False
         request.session['role_id'] = False
 
-        dealers = Dealer.objects.filter(Q(author=request.user) | Q(staff=request.user))
-        distributors = Distributor.objects.filter(Q(author=request.user) | Q(staff=request.user))
+        dealers = Dealer.objects.filter(Q(author=request.user) | Q(staff=request.user)).distinct()
+        distributors = Distributor.objects.filter(Q(author=request.user) | Q(staff=request.user)).distinct()
 
         context = {
             'dealers': dealers,

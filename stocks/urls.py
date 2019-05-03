@@ -30,6 +30,9 @@ urlpatterns = [
     path('accounts/role/', views.RoleView.as_view(), name='role-list'),
     path('accounts/dealer/<int:pk>/', views.DealerRoleView.as_view(), name='dealer-home'),
     path('accounts/distributor/<int:pk>/', views.DistributorRoleView.as_view(), name='distributor-home'),
+    path('accounts/create_staff/', views.create_staff, name='create-staff'),
+    path('accounts/staff_list/', views.StaffList.as_view(), name='staff-list'),
+
 ]
 
 if settings.DEBUG:

@@ -1,5 +1,5 @@
 from django.views import View
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from project.models import Dealer
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -19,9 +19,12 @@ class DealerRoleView(LoginRequiredMixin, View):
             if dealer:
                 request.session['role_page'] = 'dealer'
                 request.session['role_id'] = pk
+            else:
+                return redirect('role-list')
 
         context = {
             'dealer': dealer
         }
 
         return render(request=request, template_name='project/accounts/dealer.html', context=context)
+

@@ -11,7 +11,7 @@ class DistributorRoleView(LoginRequiredMixin, View):
 
         role_page = request.session.get('role_page', False)
 
-        if role_page == 'dealer':
+        if role_page == 'distributor':
             distributor = Distributor.objects.get(pk=pk)
         else:
             distributor = Distributor.objects.filter((Q(author=request.user) | Q(staff=request.user)) & Q(id=pk))
