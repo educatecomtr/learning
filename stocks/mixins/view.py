@@ -67,7 +67,7 @@ class CheckDealerDistributorMixin(PermissionMixin, UserPassesTestMixin):
 class CheckProductDistributorMixin(PermissionMixin, UserPassesTestMixin):
 
     def test_func(self):
-        if not self.check_distributor():
+        if not self.check_distributor_role():
             return False
 
         instance = self.get_object()
