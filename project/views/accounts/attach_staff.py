@@ -2,7 +2,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from project.forms import StaffRelationForm
 from stocks.helpers import check_user_management_access
-from django.contrib.auth.models import User
 
 
 @login_required
