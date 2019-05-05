@@ -31,6 +31,7 @@ urlpatterns = [
     path('accounts/dealer/<int:pk>/', views.DealerRoleView.as_view(), name='dealer-home'),
     path('accounts/distributor/<int:pk>/', views.DistributorRoleView.as_view(), name='distributor-home'),
 
+    path('accounts/attach_staff/', views.attach_staff, name='attach-staff'),
     path('accounts/create_staff/', views.create_staff, name='create-staff'),
     path('accounts/list_staff/', views.list_staff, name='list-staff'),
     path('accounts/delete_staff/<int:pk>/', views.delete_staff, name='delete-staff'),

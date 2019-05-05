@@ -1,19 +1,17 @@
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from project.forms import StaffCreationForm
 from django.db import transaction
-from stocks.helpers import check_superuser
+from stocks.helpers import check_user_management_access
 
 
 @login_required
-@user_passes_test(check_superuser)
 @transaction.atomic
 def create_staff(request):
 
-    role_id = request.session.get('role_id', False)
-    role_page = request.session.get('role_page', False)
+    queryset = check_user_management_access(request)
 
-    if role_id is False or role_page is False:
+    if not queryset:
         return redirect('role-list')
 
     if request.method == 'POST':
@@ -26,6 +24,9 @@ def create_staff(request):
             user.last_name = form.cleaned_data['last_name']
             user.email = form.cleaned_data['email']
             user.save()
+
+            role_id = request.session.get('role_id', False)
+            role_page = request.session.get('role_page', False)
 
             if role_page == 'distributor':
                 user.distributors.add(role_id)

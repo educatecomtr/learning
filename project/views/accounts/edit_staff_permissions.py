@@ -2,11 +2,9 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 from project.forms import StaffPermissionForm
 from django.contrib.auth.models import User, Permission
-from stocks.helpers import check_superuser
 
 
 @login_required
-@user_passes_test(check_superuser)
 def edit_permissions(request, pk=None):
 
     instance = User.objects.get(pk=pk)

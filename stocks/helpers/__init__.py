@@ -1,1 +1,1 @@
-from .user_management import check_superuser
+from .user_management import check_user_management_access

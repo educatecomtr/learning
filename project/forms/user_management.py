@@ -23,3 +23,7 @@ class StaffPermissionForm(forms.Form):
     dealer_permission = forms.BooleanField(label='Bayi Yönetimi', required=False)
     order_permission = forms.BooleanField(label='Sipariş Yönetimi', required=False)
     payment_permission = forms.BooleanField(label='Ödeme Yönetimi', required=False)
+
+
+class StaffRelationForm(forms.Form):
+    user = forms.ModelChoiceField(queryset=User.objects.all())

@@ -6,3 +6,4 @@ from .create_staff import create_staff
 from .edit_staff import edit_staff
 from .edit_staff_permissions import edit_permissions
 from .delete_staff import delete_staff
+from .attach_staff import attach_staff

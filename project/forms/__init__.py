@@ -1,1 +1,1 @@
-from .user_management import StaffCreationForm, StaffUpdateForm, StaffPermissionForm
+from .user_management import StaffCreationForm, StaffUpdateForm, StaffPermissionForm, StaffRelationForm

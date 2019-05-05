@@ -5,7 +5,10 @@
 {% endblock %}
 {%  block content %}
 
-    <div style="margin-bottom: 15px;text-align: right"><a href="{% url 'create-staff' %}" class="btn btn-primary">Personel Ekle</a></div>
+    <div style="margin-bottom: 15px;text-align: right">
+        <a href="{% url 'create-staff' %}" class="btn btn-primary">Personel Ekle</a>
+        <a href="{% url 'attach-staff' %}" class="btn btn-primary">Personel İlişkilendir</a>
+    </div>
 
     <table class="table table-striped">
       <thead>

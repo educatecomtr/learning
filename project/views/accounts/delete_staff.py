@@ -1,20 +1,18 @@
-from project.models import Distributor, Dealer
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
-from stocks.helpers import check_superuser
+from stocks.helpers import check_user_management_access
 
 
 @login_required
-@user_passes_test(check_superuser)
 def delete_staff(request, pk=None):
-    role_id = request.session.get('role_id', False)
-    role_page = request.session.get('role_page', False)
 
-    if role_page == 'distributor':
-        item = Distributor.objects.get(pk=role_id)
-    else:
-        item = Dealer.objects.get(pk=role_id)
+    # BURADA KULLANICI SİLİNMİYOR İLİŞKİSİ SİLİNİYOR. SİLME İŞLEMİ ADMİN PANELDEN YAPILSIN.
+    queryset = check_user_management_access(request)
 
-    item.staff.remove(pk)
+    if not queryset:
+        return redirect('role-list')
+
+    if queryset.staff.filter(id=pk).exists():
+        queryset.staff.remove(pk)
 
     return redirect('list-staff')
