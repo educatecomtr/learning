@@ -1,0 +1,59 @@
+{%  extends 'project/layout/base.html' %}
+
+{% block top %}
+    <div class="jumbotron"><h4>Ürün Listele</h4></div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{%  block content %}
+    <div style="margin-bottom: 15px;text-align: right"><a href="{% url 'project:create-product' %}" class="btn btn-primary">Ürün Ekle</a></div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Ürün Adı</th>
+          <th scope="col">Marka</th>
+          <th scope="col">Fiyat</th>
+          <th scope="col">Stok Adedi</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in product_list %}
+            <tr>
+                <th scope="row">{{ page_obj.start_index|add:forloop.counter0 }}</th>
+                <td>{{ product.name }}</td>
+                <td>{{ product.brand }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.stock_count }}</td>
+                <td style="text-align: right">
+                    <a href="{% url 'project:delete-product' product.pk %}" class="btn btn-danger btn-sm">Sil</a>
+                    <a href="{% url 'project:edit-product' product.pk %}" class="btn btn-warning btn-sm">Düzenle</a>
+                </td>
+            </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">Önceki</a>
+                {% endif %}
+                <span class="page-current">
+                    Toplam  {{ page_obj.paginator.num_pages }} sayfadan {{ page_obj.number }} sayfa.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Sonraki</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+{% endblock %}

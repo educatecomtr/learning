@@ -10,3 +10,4 @@ class Dealer(Company):
     class Meta:
         verbose_name = 'Bayi'
         verbose_name_plural = 'Bayiler'
+        permissions = [('manage_dealer', 'Bayi yönetim izni')]

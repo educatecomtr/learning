@@ -1,0 +1,13 @@
+{%  extends 'project/layout/base.html' %}
+
+{% block top %}
+    <div class="jumbotron"><h4>Ürün Sil</h4></div>
+{% endblock %}
+
+{%  block content %}
+<form method="post">
+    {% csrf_token %}
+   Silmek istediğinize emin misiniz "{{ object }}" ?
+    <input type="submit" value="Sil" />
+</form>
+{% endblock %}

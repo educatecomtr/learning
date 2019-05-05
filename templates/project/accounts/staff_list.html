@@ -1,7 +1,38 @@
 {%  extends 'project/layout/base.html' %}
 
+{% block top %}
+        <div class="jumbotron"><h4>Personel Listele : {{ request.session.role_name }}</h4></div>
+{% endblock %}
 {%  block content %}
 
-{{ staff_list }}
+    <div style="margin-bottom: 15px;text-align: right"><a href="{% url 'create-staff' %}" class="btn btn-primary">Personel Ekle</a></div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Kullanıcı Adı</th>
+          <th scope="col">Adı Soyadı</th>
+          <th scope="col">Email</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for staff in staff_list %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ staff.username }}</td>
+                <td>{{ staff.first_name }} {{ staff.last_name }}</td>
+                <td>{{ staff.email }}</td>
+                <td style="text-align: right">
+                    <a href="{% url 'delete-staff' staff.pk %}" class="btn btn-danger btn-sm">Sil</a>
+                    <a href="{% url 'edit-staff' staff.pk %}" class="btn btn-warning btn-sm">Düzenle</a>
+                    <a href="{% url 'edit-permissions' staff.pk %}" class="btn btn-primary btn-sm">Yetkiler</a>
+                </td>
+            </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
 
 {% endblock %}

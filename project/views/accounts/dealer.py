@@ -14,11 +14,13 @@ class DealerRoleView(LoginRequiredMixin, View):
         if role_page == 'dealer':
             dealer = Dealer.objects.get(pk=pk)
         else:
-            dealer = Dealer.objects.filter((Q(author=request.user) | Q(staff=request.user)) & Q(id=pk))
+            dealer = Dealer.objects.filter((Q(author=request.user) | Q(staff=request.user)) & Q(id=pk)).first()
 
             if dealer:
                 request.session['role_page'] = 'dealer'
                 request.session['role_id'] = pk
+                request.session['role_name'] = dealer.name
+
             else:
                 return redirect('role-list')
 

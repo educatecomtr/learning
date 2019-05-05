@@ -1,0 +1,42 @@
+{%  extends 'project/layout/base.html' %}
+
+{% block top %}
+    <div class="jumbotron"><h4>Bayi Listele</h4></div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{%  block content %}
+    <div style="margin-bottom: 15px;text-align: right"><a href="{% url 'project:create-dealer' %}" class="btn btn-primary">Bayi Ekle</a></div>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Bayi Adı</th>
+          <th scope="col">Email</th>
+          <th scope="col">Telefon</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for dealer in dealer_list %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ dealer.name }}</td>
+                <td>{{ dealer.email }}</td>
+                <td>{{ dealer.phone }}</td>
+                <td style="text-align: right">
+                    <a href="{% url 'project:delete-dealer' dealer.pk %}" class="btn btn-danger btn-sm">Sil</a>
+                    <a href="{% url 'project:edit-dealer' dealer.pk %}" class="btn btn-warning btn-sm">Düzenle</a>
+                </td>
+            </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}

@@ -1,36 +1,79 @@
 {%  extends 'project/layout/base.html' %}
+{% block top %}
+    <div class="jumbotron"><h4>Distribütör Yönetimi : {{ distributor.name }}</h4></div>
+{% endblock %}
 
 {%  block content %}
-    {{ distributor.name }}
     <div class="jumbotron">
-    <div class="row w-100">
-            <div class="col-md-3">
+        <div class="row w-100">
+            {% if request.user.is_superuser %}
+            <div class="col-md-4">
+                <div class="card border-danger p-3">
+                    <div class="card border-danger text-danger p-3 my-card" >
+                        <span class="fa fa-user" aria-hidden="true"></span>
+                    </div>
+                    <div class="text-center mt-3">
+                        <h4><a href="{% url 'list-staff' %}">Personel Yönetimi</a></h4>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if perms.project.manage_payment or request.user.is_superuser %}
+            <div class="col-md-4">
+                <div class="card border-info p-3">
+                    <div class="card border-info text-info p-3 my-card">
+                        <span class="fa fa-book" aria-hidden="true"></span>
+                    </div>
+                    <div class="text-center mt-3">
+                        <h4>Ödeme Yönetimi</h4>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if perms.project.manage_order or request.user.is_superuser %}
+            <div class="col-md-4">
+                <div class="card border-success p-3">
+                    <div class="card border-success text-success p-3 my-card">
+                        <span class="fa fa-eye" aria-hidden="true"></span>
+                    </div>
+                    <div class="text-center mt-3">
+                        <h4>Sipariş Yönetimi</h4>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+         </div>
+        <br>
+        <div class="row w-100">
+
+            {% if perms.project.manage_product or request.user.is_superuser %}
+            <div class="col-md-4">
                 <div class="card border-info mx-sm-1 p-3">
-                    <div class="card border-info shadow text-info p-3 my-card" ><span class="fa fa-book" aria-hidden="true"></span></div>
-                    <div class="text-info text-center mt-3"><h4>Alacaklar</h4></div>
+                    <div class="card border-info shadow text-info p-3 my-card" >
+                        <span class="fa fa-book" aria-hidden="true"></span>
+                    </div>
+                    <div class="text-center mt-3">
+                        <h4><a href="{% url 'project:list-product' %}">Ürün Yönetimi</a></h4>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card border-success mx-sm-1 p-3">
-                    <div class="card border-success shadow text-success p-3 my-card"><span class="fa fa-eye" aria-hidden="true"></span></div>
-                    <div class="text-success text-center mt-3"><h4>Siparişler</h4></div>
-                </div>
-            </div>
+            {% endif %}
 
-            <div class="col-md-3">
-                <div class="card border-danger mx-sm-1 p-3">
-                    <div class="card border-danger shadow text-danger p-3 my-card" ><span class="fa fa-user" aria-hidden="true"></span></div>
-                    <div class="text-danger text-center mt-3"><h4><a href="{% url 'create-staff' %}">Personel Ekle</a></h4></div>
+            {% if perms.project.manage_dealer or request.user.is_superuser %}
+            <div class="col-md-4">
+                <div class="card border-warning mx-sm-1 p-3">
+                    <div class="card border-warning shadow text-warning p-3 my-card">
+                        <span class="fa fa-eye" aria-hidden="true"></span>
+                    </div>
+                    <div class="text-center mt-3">
+                        <h4><a href="{% url 'project:list-dealer' %}">Bayi Yönetimi</a></h4>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-md-3">
-                <div class="card border-danger mx-sm-1 p-3">
-                    <div class="card border-danger shadow text-danger p-3 my-card" ><span class="fa fa-user" aria-hidden="true"></span></div>
-                    <div class="text-danger text-center mt-3"><h4><a href="{% url 'staff-list' %}">Personel Listele</a></h4></div>
-                </div>
-            </div>
-
+            {% endif %}
          </div>
     </div>
+
 {% endblock %}

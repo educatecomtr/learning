@@ -133,3 +133,8 @@ STATICFILES_DIRS = [
 INTERNAL_IPS = ('127.0.0.1',)
 
 LOGIN_REDIRECT_URL = '/accounts/role/'
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+

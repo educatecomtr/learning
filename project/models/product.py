@@ -1,5 +1,5 @@
 from django.db import models
-from utils.mixins import SlugMixin
+from stocks.mixins import SlugMixin
 from .brand import Brand
 from .distributor import Distributor
 
@@ -13,10 +13,13 @@ class Product(SlugMixin):
     active = models.BooleanField(default=True, verbose_name='Aktif')
     price = models.FloatField(verbose_name='Fiyat')
     stock_count = models.PositiveIntegerField(verbose_name='Stok Adedi')
+    cover = models.ImageField(verbose_name='Resim', upload_to="images/%Y/%m/%D/", blank=True, null=True)
 
     class Meta:
         verbose_name = 'Ürün'
         verbose_name_plural = 'Ürünler'
+        permissions = [('manage_product', 'Ürün yönetim izni')]
+        ordering = ['-created']
 
     def __str__(self):
         return self.name

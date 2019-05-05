@@ -1,0 +1,14 @@
+{%  extends 'project/layout/base.html' %}
+
+{% block top %}
+    <div class="jumbotron"><h4>Yetki Düzenle : {{ request.session.role_name }}</h4></div>
+{% endblock %}
+
+{%  block content %}
+ <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Görevleri Güncelle</button>
+  </form>
+
+{% endblock %}

@@ -13,6 +13,7 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Sipariş'
         verbose_name_plural = 'Siparişler'
+        permissions = [('manage_order', 'Sipariş yönetim izni')]
 
     def __str__(self):
         return self.dealer.name

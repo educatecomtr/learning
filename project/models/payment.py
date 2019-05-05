@@ -21,6 +21,7 @@ class Payment(models.Model):
     class Meta:
         verbose_name = 'Ödeme'
         verbose_name_plural = 'Ödemeler'
+        permissions = [('manage_payment', 'Ödeme yönetim izni')]
 
     def __str__(self):
         return self.dealer.name

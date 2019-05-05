@@ -14,11 +14,13 @@ class DistributorRoleView(LoginRequiredMixin, View):
         if role_page == 'distributor':
             distributor = Distributor.objects.get(pk=pk)
         else:
-            distributor = Distributor.objects.filter((Q(author=request.user) | Q(staff=request.user)) & Q(id=pk))
+            distributor = Distributor.objects.filter((Q(author=request.user) | Q(staff=request.user)) & Q(id=pk)).first()
 
             if distributor:
                 request.session['role_page'] = 'distributor'
                 request.session['role_id'] = pk
+                request.session['role_name'] = distributor.name
+
             else:
                 return redirect('role-list')
 

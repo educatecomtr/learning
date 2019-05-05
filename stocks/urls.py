@@ -30,10 +30,15 @@ urlpatterns = [
     path('accounts/role/', views.RoleView.as_view(), name='role-list'),
     path('accounts/dealer/<int:pk>/', views.DealerRoleView.as_view(), name='dealer-home'),
     path('accounts/distributor/<int:pk>/', views.DistributorRoleView.as_view(), name='distributor-home'),
+
     path('accounts/create_staff/', views.create_staff, name='create-staff'),
-    path('accounts/staff_list/', views.StaffList.as_view(), name='staff-list'),
+    path('accounts/list_staff/', views.list_staff, name='list-staff'),
+    path('accounts/delete_staff/<int:pk>/', views.delete_staff, name='delete-staff'),
+    path('accounts/edit_staff/<int:pk>/', views.edit_staff, name='edit-staff'),
+    path('accounts/edit_permissions/<int:pk>/', views.edit_permissions, name='edit-permissions'),
 
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

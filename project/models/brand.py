@@ -1,5 +1,5 @@
 from django.db import models
-from utils.mixins import SlugMixin
+from stocks.mixins import SlugMixin
 
 
 class Brand(SlugMixin):
