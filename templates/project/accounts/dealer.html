@@ -1,7 +1,12 @@
 {%  extends 'project/layout/base.html' %}
 
 {% block top %}
-    <div class="jumbotron"><h4>Bayi Yönetimi : {{ dealer.name }}</h4></div>
+    <div class="jumbotron">
+        <h4>
+            <a href="{% url 'role-list' %}">Role Seçimi</a> ->
+            Bayi Yönetimi : {{ dealer.name }}
+        </h4>
+    </div>
 {% endblock %}
 
 {%  block content %}

@@ -1,7 +1,9 @@
 {%  extends 'project/layout/base.html' %}
 
 {% block top %}
-    <div class="jumbotron"><h4>Ürün Ekle</h4></div>
+        <h4>
+            <a href="{% url 'project:list-product' %}">Ürünler</a> -> Ürün Ekle : {{ request.session.role_name }}
+        </h4>
 {% endblock %}
 
 {%  block content %}
