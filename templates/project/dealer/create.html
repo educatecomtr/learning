@@ -1,7 +1,11 @@
 {%  extends 'project/layout/base.html' %}
 
 {% block top %}
-    <div class="jumbotron"><h4>Bayi Ekle</h4></div>
+    <div class="jumbotron">
+        <h4>
+            <a href="{% url 'project:list-dealer' %}">Bayiler</a> -> Bayi Ekle : {{ request.session.role_name }}
+        </h4>
+    </div>
 {% endblock %}
 
 {%  block content %}

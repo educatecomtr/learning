@@ -1,7 +1,12 @@
 {%  extends 'project/layout/base.html' %}
 
 {% block top %}
-    <div class="jumbotron"><h4>Yetki Düzenle : {{ request.session.role_name }}</h4></div>
+    <div class="jumbotron">
+        <h4>
+            <a href="{% url 'project:list-product' %}">Personeller</a> ->
+            Personel Yetki Düzenle : {{ request.session.role_name }}
+        </h4>
+    </div>
 {% endblock %}
 
 {%  block content %}

@@ -1,7 +1,13 @@
 {%  extends 'project/layout/base.html' %}
 
 {% block top %}
-    <div class="jumbotron"><h4>Ürün Listele</h4></div>
+
+    <div class="jumbotron">
+        <h4>
+            Shop
+        </h4>
+    </div>
+
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-danger" role="alert">
@@ -19,7 +25,7 @@
                   <img src="{{ product.cover.url }}" class="card-img-top" alt="{{ product.name }}">
                 {% endif %}
                 <div class="card-body">
-                  <h5 class="card-title">{{ product.name }} | {{ product.brand }}</h5>
+                    <h5 class="card-title"><a href="{% url 'project:detail-shop' product.pk %}">{{ product.name }} | {{ product.brand }}</a></h5>
                   <p class="card-text">{{ product.content }}
                       <br>
                       <a href="#" class="btn btn-primary">Sepete Ekle</a>
