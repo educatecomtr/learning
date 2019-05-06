@@ -1,0 +1,33 @@
+{%  extends 'project/layout/base.html' %}
+
+{% block top %}
+    <div class="jumbotron">
+        <h4>
+            <a href="{% url 'project:list-shop' %}">Shop</a> -> {{ product.name }}
+        </h4>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{%  block content %}
+    <div class="card">
+        {% if product.cover %}
+            <img src="{{ product.cover.url }}" class="card-img-top" alt="{{ product.name }}">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">{{ product.brand }}</h5>
+            <p class="card-text">
+                {{ product.content }}
+                <br>
+                <a href="#" class="btn btn-primary">Sepete Ekle</a>
+            </p>
+            <p class="card-text"><small class="text-muted">{{ product.price }} TL | Stok : {{ product.stock_count }}</small></p>
+        </div>
+    </div>
+{% endblock %}
