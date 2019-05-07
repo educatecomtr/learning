@@ -6,13 +6,6 @@
             <a href="{% url 'project:list-shop' %}">Shop</a> -> {{ product.name }}
         </h4>
     </div>
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-danger" role="alert">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
 {% endblock %}
 
 {%  block content %}

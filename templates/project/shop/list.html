@@ -1,20 +1,11 @@
 {%  extends 'project/layout/base.html' %}
 
 {% block top %}
-
     <div class="jumbotron">
         <h4>
             Shop
         </h4>
     </div>
-
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-danger" role="alert">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
 {% endblock %}
 
 {%  block content %}
@@ -26,9 +17,9 @@
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title"><a href="{% url 'project:detail-shop' product.pk %}">{{ product.name }} | {{ product.brand }}</a></h5>
-                  <p class="card-text">{{ product.content }}
+                  <p class="card-text">{{ product.content | truncatechars:50 }}
                       <br>
-                      <a href="#" class="btn btn-primary">Sepete Ekle</a>
+                      <a href="{% url 'project:add-cart' product.pk %}" class="btn btn-primary">Sepete Ekle</a>
                   </p>
                   <p class="card-text"><small class="text-muted">{{ product.price }} TL | Stok : {{ product.stock_count }}</small></p>
                 </div>
