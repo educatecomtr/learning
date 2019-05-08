@@ -17,6 +17,9 @@
 {% endblock %}
 
 {%  block content %}
+    {% if cart %}
+    Sepete toplam {{ cart|length }} ürün eklendi. Sepet tutarı : {{ cart.get_total_price }} TL.
+        Sepete yeni ürün eklemek için <a href="{% url 'project:list-shop' %}">tıklayın.</a> <br><br>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -47,9 +50,12 @@
                 <td>{{ cart|length }}</td>
                 <td>{{ cart.get_total_price }}</td>
                 <td style="text-align: right">
-                    <a href="{% url 'project:clear-cart' %}" class="btn btn-success btn-sm">Siparişi Tamamla</a>
+                    <a href="{% url 'project:create-order' %}" class="btn btn-success btn-sm">Siparişi Tamamla</a>
                     <a href="{% url 'project:clear-cart' %}" class="btn btn-danger btn-sm">Sepeti Temizle</a>
                 </td>
             </tr>
     </table>
+    {% else %}
+    Sepete henüz ürün eklenmemiş. Ürün eklemek için <a href="{% url 'project:list-shop' %}">tıklayın.</a>
+    {% endif %}
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.views.generic import CreateView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
 from project.models import Dealer
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
@@ -7,7 +7,7 @@ from stocks.mixins import CheckDistributorMixin
 
 
 # bayi ekleme
-class DealerCreateView(CheckDistributorMixin, PermissionRequiredMixin, SuccessMessageMixin, LoginRequiredMixin, CreateView):
+class DealerCreateView(CheckDistributorMixin, PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = Dealer
     fields = ('name', 'content', 'author', 'address', 'phone', 'email', 'active')
     template_name = "project/dealer/create.html"

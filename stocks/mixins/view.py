@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
 
@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 # Kullanıcı rol seçtiğinde sessiona role_id ve role_page eklemiştik.
 # PermissionMixin diğer Mixinlerde sessiondan gelen verileri ve
 # Bu veriler ile distributor ve bayi yetkisi olup olmadığını kontrol ediyoruz.
-class PermissionMixin:
+class PermissionMixin(LoginRequiredMixin):
     role_id = False
     role_page = False
 

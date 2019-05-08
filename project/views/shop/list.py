@@ -1,11 +1,10 @@
 from django.views.generic import ListView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from project.models import Product, Dealer
 from stocks.mixins import CheckDealerMixin
 
 
 # ürün listeleme
-class ShopListView(CheckDealerMixin, LoginRequiredMixin, ListView):
+class ShopListView(CheckDealerMixin, ListView):
     model = Product
     template_name = "project/shop/list.html"
     context_object_name = 'shop_list'

@@ -1,5 +1,5 @@
 from django.views.generic import UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from project.models import Dealer
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
@@ -7,7 +7,7 @@ from stocks.mixins import CheckDealerDistributorMixin
 
 
 # bayi düzenleme
-class DealerUpdateView(CheckDealerDistributorMixin, SuccessMessageMixin, PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+class DealerUpdateView(CheckDealerDistributorMixin, SuccessMessageMixin, PermissionRequiredMixin, UpdateView):
     model = Dealer
     fields = ('name', 'content', 'author', 'address', 'phone', 'email', 'active')
     template_name = "project/dealer/edit.html"

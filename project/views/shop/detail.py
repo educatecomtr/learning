@@ -1,13 +1,11 @@
 from django.views.generic import DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from project.models import Product, Dealer
+from project.models import Product
 from stocks.mixins import CheckDealerMixin
-from django.views.generic.edit import FormMixin
 from project.forms import AddProductToShoppingCartForm
 
 
 # ürün detayı
-class ShopDetailView(CheckDealerMixin, LoginRequiredMixin, FormMixin, DetailView):
+class ShopDetailView(CheckDealerMixin, DetailView):
     model = Product
     template_name = "project/shop/detail.html"
     context_object_name = 'product'

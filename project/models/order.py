@@ -20,7 +20,7 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Sipariş')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Sipariş', related_name='ordered_items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Ürün')
     item_count = models.PositiveIntegerField(verbose_name='Ürün Adedi')
     item_price = models.FloatField(verbose_name='Ürün Fiyatı')

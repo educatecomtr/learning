@@ -25,5 +25,14 @@ urlpatterns = [
     path('shop/cart/delete/<int:pk>/', views.CartDelete.as_view(), name='delete-cart'),
     path('shop/cart/clear/', views.CartClear.as_view(), name='clear-cart'),
 
+    # sipariş sayfaları
+    path('order/list/', views.OrderListView.as_view(), name='list-order'),
+    path('order/detail/<int:pk>/', views.OrderDetailView.as_view(), name='detail-order'),
+    path('order/create/', views.OrderAdd.as_view(), name='create-order'),
+    path('order/cancel/<int:pk>/', views.OrderDelete.as_view(), name='cancel-order'),
+    path('order/approve/<int:pk>/', views.OrderApprove.as_view(), name='approve-order'),
+
+    # ödeme sayfaları
+
 ]
 

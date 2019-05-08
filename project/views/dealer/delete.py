@@ -1,5 +1,5 @@
 from django.views.generic import DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from project.models import Dealer
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
@@ -7,7 +7,7 @@ from stocks.mixins import CheckDealerDistributorMixin
 
 
 # bayi silme
-class DealerDeleteView(CheckDealerDistributorMixin, SuccessMessageMixin, PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
+class DealerDeleteView(CheckDealerDistributorMixin, SuccessMessageMixin, PermissionRequiredMixin, DeleteView):
     model = Dealer
     template_name = "project/dealer/delete.html"
     success_url = reverse_lazy('project:list-dealer')

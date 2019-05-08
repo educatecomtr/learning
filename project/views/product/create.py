@@ -1,5 +1,5 @@
 from django.views.generic import CreateView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from project.models import Product
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
@@ -7,7 +7,7 @@ from stocks.mixins import CheckDistributorMixin
 
 
 # ürün ekleme
-class ProductCreateView(CheckDistributorMixin, PermissionRequiredMixin, SuccessMessageMixin, LoginRequiredMixin, CreateView):
+class ProductCreateView(CheckDistributorMixin, PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = Product
     fields = ('name', 'content', 'cover', 'brand', 'price', 'stock_count', 'active')
     template_name = "project/product/create.html"
