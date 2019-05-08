@@ -2,7 +2,7 @@ from django.apps import AppConfig
 
 
 class StocksConfig(AppConfig):
-    name = 'stocks'  # must be the same with your project name
+    name = 'stocks'  # proje adı ile aynı olmalıdır
 
     def ready(self):
-        import stocks.signals
+        import stocks.signals # sinyallerin çalışmasını sağlar.

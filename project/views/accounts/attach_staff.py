@@ -4,6 +4,7 @@ from project.forms import StaffRelationForm
 from stocks.helpers import check_user_management_access
 
 
+# personel ilişkilendirme
 @login_required
 def attach_staff(request):
 

@@ -6,6 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from stocks.mixins import CheckDealerDistributorMixin
 
 
+# bayi silme
 class DealerDeleteView(CheckDealerDistributorMixin, SuccessMessageMixin, PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
     model = Dealer
     template_name = "project/dealer/delete.html"

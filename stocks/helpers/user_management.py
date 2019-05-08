@@ -1,6 +1,8 @@
 from project.models import Distributor, Dealer
 
 
+# kullanıcnın distribütör veya bayi yetkisi varmı kontrol edilir.
+# eğer yetkisi varsa ilgili bayi veya distribütör bilgileri döndürülür
 def check_user_management_access(request):
     role_id = request.session.get('role_id', False)
     role_page = request.session.get('role_page', False)

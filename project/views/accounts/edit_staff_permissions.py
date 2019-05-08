@@ -4,6 +4,7 @@ from project.forms import StaffPermissionForm
 from django.contrib.auth.models import User, Permission
 
 
+# personel yetki düzenleme
 @login_required
 def edit_permissions(request, pk=None):
 

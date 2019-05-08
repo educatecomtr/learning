@@ -6,6 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from stocks.mixins import CheckProductDistributorMixin
 
 
+# ürün düzenleme
 class ProductUpdateView(CheckProductDistributorMixin, SuccessMessageMixin, PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Product
     fields = ('name', 'content', 'cover', 'brand', 'price', 'stock_count', 'active')

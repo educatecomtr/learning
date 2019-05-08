@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from stocks.helpers import check_user_management_access
 
 
+# personel silme
 @login_required
 def delete_staff(request, pk=None):
 

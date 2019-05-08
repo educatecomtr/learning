@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 
 
+# bayi rol listeleme
 class DealerRoleView(LoginRequiredMixin, View):
 
     def get(self, request, pk=None):

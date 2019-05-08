@@ -27,10 +27,10 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
 
+    # kullanıcı rol sayfaları
     path('accounts/role/', views.RoleView.as_view(), name='role-list'),
     path('accounts/dealer/<int:pk>/', views.DealerRoleView.as_view(), name='dealer-home'),
     path('accounts/distributor/<int:pk>/', views.DistributorRoleView.as_view(), name='distributor-home'),
-
     path('accounts/attach_staff/', views.attach_staff, name='attach-staff'),
     path('accounts/create_staff/', views.create_staff, name='create-staff'),
     path('accounts/list_staff/', views.list_staff, name='list-staff'),

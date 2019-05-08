@@ -6,6 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from stocks.mixins import CheckDistributorMixin
 
 
+# ürün ekleme
 class ProductCreateView(CheckDistributorMixin, PermissionRequiredMixin, SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Product
     fields = ('name', 'content', 'cover', 'brand', 'price', 'stock_count', 'active')

@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 
 
+# rol seçme
 class RoleView(LoginRequiredMixin, View):
 
     def get(self, request):

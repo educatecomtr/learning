@@ -4,6 +4,7 @@ from project.models import Product
 from stocks.mixins import CheckDistributorMixin
 
 
+# ürün listeleme
 class ProductListView(CheckDistributorMixin, PermissionRequiredMixin, LoginRequiredMixin, ListView):
     model = Product
     template_name = "project/product/list.html"

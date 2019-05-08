@@ -5,6 +5,7 @@ from django.db import transaction
 from stocks.helpers import check_user_management_access
 
 
+# personel ekleme
 @login_required
 @transaction.atomic
 def create_staff(request):

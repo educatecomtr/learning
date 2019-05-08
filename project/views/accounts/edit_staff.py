@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 from stocks.helpers import check_user_management_access
 
 
+# personel düzenleme
 @login_required
 def edit_staff(request, pk=None):
 

@@ -1,7 +1,7 @@
 from django import forms
 
 
-# Ürünü shopping cart eklemek için formumuzu oluşturalım.
+# Ürünü shopping cart eklemek için kullanılmaktadır.
 class AddProductToShoppingCartForm(forms.Form):
     # Bunu dışarda da yazabilirdik
     PRODUCT_QUANTITY = [(i, str(i)) for i in range(1, 6)]

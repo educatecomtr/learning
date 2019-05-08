@@ -3,6 +3,7 @@ from django.template.defaultfilters import slugify
 import itertools
 
 
+# Veritabanına kayot eklenirken slug alanının otomatik olarak name alanından oluşturulmasını sağlar.
 class SlugMixin(models.Model):
     name = models.CharField(max_length=255, verbose_name='Ad')
     slug = models.SlugField(unique=True, verbose_name='Slug', editable=False)

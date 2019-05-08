@@ -6,6 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from stocks.mixins import CheckProductDistributorMixin
 
 
+# ürün silme
 class ProductDeleteView(CheckProductDistributorMixin, SuccessMessageMixin, PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
     model = Product
     template_name = "project/product/delete.html"

@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 
 
+# bayi rol listeleme
 class DistributorRoleView(LoginRequiredMixin, View):
 
     def get(self, request, pk=None):

@@ -3,6 +3,9 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
 
 
+# Kullanıcı rol seçtiğinde sessiona role_id ve role_page eklemiştik.
+# PermissionMixin diğer Mixinlerde sessiondan gelen verileri ve
+# Bu veriler ile distributor ve bayi yetkisi olup olmadığını kontrol ediyoruz.
 class PermissionMixin:
     role_id = False
     role_page = False
@@ -32,6 +35,7 @@ class PermissionMixin:
         return redirect('role-list')
 
 
+# Kullanıcının distributor rolü olup olmadığı kontrol edilir.
 class CheckDistributorMixin(PermissionMixin, UserPassesTestMixin):
 
     def test_func(self):
@@ -41,6 +45,7 @@ class CheckDistributorMixin(PermissionMixin, UserPassesTestMixin):
         return True
 
 
+# Kullanıcının bayi rolü olup olmadığı kontrol edilir.
 class CheckDealerMixin(PermissionMixin, UserPassesTestMixin):
 
     def test_func(self):
@@ -50,6 +55,8 @@ class CheckDealerMixin(PermissionMixin, UserPassesTestMixin):
         return True
 
 
+# Kullanıcının distribütör rolu olup olmadığı kontrol edilir.
+# Eğer distribütör rolü varsa ilgili bayi için yetkisi olup olmadığı kontrol edilir.
 class CheckDealerDistributorMixin(PermissionMixin, UserPassesTestMixin):
 
     def test_func(self):
@@ -64,6 +71,8 @@ class CheckDealerDistributorMixin(PermissionMixin, UserPassesTestMixin):
         return True
 
 
+# Kullanıcının distribütör rolu olup olmadığı kontrol edilir.
+# Eğer distribütör rolü varsa ürün için yetkisi olup olmadığı kontrol edilir.
 class CheckProductDistributorMixin(PermissionMixin, UserPassesTestMixin):
 
     def test_func(self):

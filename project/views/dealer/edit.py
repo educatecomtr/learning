@@ -6,6 +6,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from stocks.mixins import CheckDealerDistributorMixin
 
 
+# bayi düzenleme
 class DealerUpdateView(CheckDealerDistributorMixin, SuccessMessageMixin, PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
     model = Dealer
     fields = ('name', 'content', 'author', 'address', 'phone', 'email', 'active')
