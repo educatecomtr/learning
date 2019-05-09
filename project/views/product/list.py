@@ -16,4 +16,3 @@ class ProductListView(CheckDistributorMixin, PermissionRequiredMixin, ListView):
     def get_queryset(self):
         distributor_id = self.request.session.get('role_id')
         return self.model.objects.filter(distributor_id=distributor_id)
-
