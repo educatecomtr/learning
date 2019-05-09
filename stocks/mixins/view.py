@@ -71,9 +71,9 @@ class CheckDealerDistributorMixin(PermissionMixin, UserPassesTestMixin):
         return True
 
 
-# Kullanıcının distribütör rolu olup olmadığı kontrol edilir.
-# Eğer distribütör rolü varsa ürün için yetkisi olup olmadığı kontrol edilir.
-class CheckProductDistributorMixin(PermissionMixin, UserPassesTestMixin):
+# distribütör rolu olup olmadığı kontrol edilir.
+# Eğer distribütör rolü varsa nesne için yetkisi olup olmadığı kontrol edilir.
+class CheckDistributorObjectMixin(PermissionMixin, UserPassesTestMixin):
 
     def test_func(self):
         if not self.check_distributor_role():
@@ -82,6 +82,21 @@ class CheckProductDistributorMixin(PermissionMixin, UserPassesTestMixin):
         instance = self.get_object()
 
         if instance.distributor_id != self.role_id:
+            return False
+
+        return True
+
+
+# bayi rolu olup olmadığı kontrol edilir.
+# Eğer bayi rolü varsa nesne için yetkisi olup olmadığı kontrol edilir.
+class CheckDealerObjectMixin(PermissionMixin, UserPassesTestMixin):
+    def test_func(self):
+        if not self.check_dealer_role():
+            return False
+
+        instance = self.get_object()
+
+        if instance.dealer_id != self.role_id:
             return False
 
         return True

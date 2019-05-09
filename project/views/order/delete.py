@@ -1,24 +1,25 @@
-from django.views import View
-from django.shortcuts import redirect
-from project.feeds import Cart
-from project.models import Product
-from django.contrib import messages
+from django.views.generic import DeleteView
+from project.models import Order
+from django.urls import reverse_lazy
+from stocks.mixins import CheckDealerObjectMixin
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 # Sipariş silme
-class OrderDelete(View):
-    success_message = 'Ürün başarıyla karttan çıkartıldı.'
-    error_message = 'Ürün karttan silinemedi.'
+class OrderDeleteView(CheckDealerObjectMixin, SuccessMessageMixin, DeleteView):
+    model = Order
+    template_name = "project/order/delete.html"
+    success_url = reverse_lazy('project:list-order')
+    success_message = 'Sipariş başarıyla iptal edildi.'
 
-    def get(self, request, pk=None):
-        try:
-            cart = Cart(request)
-            product = Product.objects.get(pk=pk)
-            cart.remove(product)
-            messages.success(self.request, self.success_message)
-        except Exception as e:
-            messages.error(self.request, self.error_message)
+    def delete(self, request, *args, **kwargs):
 
-        return redirect('project:detail-cart')
+        self.object = self.get_object()
+        items = self.object.ordered_items.all()
 
+        for item in items:
+            item.product.stock_count = item.item_count + item.product.stock_count
+            item.product.save()
+
+        return super(OrderDeleteView, self).delete(request, *args, **kwargs)
 

@@ -19,8 +19,6 @@ class TryIter:
 # Bunun için add, remove ve clear metodlarını oluşturalım. İçerini daha sonra dolduracağız.
 class Cart(object):
 
-    distributors = {}
-
     # Shopping Cartımızı sessionda tutacağız.
     # Bu nedenle kart çağırıldığında daha önce bu kart için bir session oluşturulmuşmu kontrol edelim.
     # Ürünleri tutacağımız session adı shopping_cart olsun.
@@ -29,12 +27,19 @@ class Cart(object):
     def __init__(self, request):
 
         self.session = request.session
+
         cart = self.session.get('shopping_cart')
+        distributors = self.session.get('shopping_distributors')
 
         if not cart:
             cart = self.session['shopping_cart'] = {}
+            distributors = self.session['shopping_distributors'] = {}
+        else:
+            if not distributors:
+                cart = self.session['shopping_cart'] = {}
 
         self.cart = cart
+        self.distributors = distributors
 
     # ürünlerimiz benzersiz olduğu için kartımızda ürün id ile tutabiliriz.
     # dict lerin keyleri string olarak tutulduğu için product_id yi stringe çevirelim.
@@ -50,7 +55,7 @@ class Cart(object):
             if product.stock_count < quantity:
                 return False
 
-            if product.distributor_id not in self.distributors:
+            if distributor_id not in self.distributors:
 
                 self.distributors[distributor_id] = 1;
 
@@ -59,7 +64,7 @@ class Cart(object):
             if product.stock_count < self.cart[product_id]['quantity'] + quantity:
                 return False
 
-            if product.distributor_id not in self.distributors:
+            if distributor_id not in self.distributors:
                 self.distributors[distributor_id] += 1;
 
             self.cart[product_id]['quantity'] += quantity
@@ -69,6 +74,7 @@ class Cart(object):
 
     def save(self):
         self.session['shopping_cart'] = self.cart
+        self.session['shopping_distributors'] = self.distributors
         # self.session.modified = True
 
     # Ürünü karttan silmek için öncelikle cart içerisinde ürün varmı bakalım.
@@ -90,7 +96,7 @@ class Cart(object):
 
     # Kartı temizlemek için tüm session bilgisini silelim.
     def clear(self):
-        self.distributors = {}
+        del self.session['shopping_distributors']
         del self.session['shopping_cart']
         # self.session.modified = True
 

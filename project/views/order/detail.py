@@ -1,10 +1,11 @@
 from django.views.generic import DeleteView
 from project.models import Order
 from project.feeds import OrderObject
+from stocks.mixins import CheckDealerObjectMixin
 
 
 # Sipariş detay görüntüleme
-class OrderDetailView(DeleteView):
+class OrderDetailView(CheckDealerObjectMixin, DeleteView):
     model = Order
     context_object_name = 'order'
     template_name = 'project/order/detail.html'

@@ -18,7 +18,7 @@ class Order(models.Model):
         permissions = [('manage_order', 'Sipariş yönetim izni')]
 
     def __str__(self):
-        return self.dealer.name
+        return '%s' % (self.pk)
 
 
 class OrderItem(models.Model):

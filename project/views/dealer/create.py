@@ -24,6 +24,7 @@ class DealerCreateView(CheckDistributorMixin, PermissionRequiredMixin, SuccessMe
 
         return response
 
+    '''
     def get_context_data(self, **kwargs):
         context = super(DealerCreateView, self).get_context_data(**kwargs)
 
@@ -31,3 +32,4 @@ class DealerCreateView(CheckDistributorMixin, PermissionRequiredMixin, SuccessMe
 
         context['form'].fields['author'].queryset = distributor.staff.all()
         return context
+    '''

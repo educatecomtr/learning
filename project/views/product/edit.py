@@ -3,11 +3,11 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from project.models import Product
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
-from stocks.mixins import CheckProductDistributorMixin
+from stocks.mixins import CheckDistributorObjectMixin
 
 
 # ürün düzenleme
-class ProductUpdateView(CheckProductDistributorMixin, SuccessMessageMixin, PermissionRequiredMixin, UpdateView):
+class ProductUpdateView(CheckDistributorObjectMixin, SuccessMessageMixin, PermissionRequiredMixin, UpdateView):
     model = Product
     fields = ('name', 'content', 'cover', 'brand', 'price', 'stock_count', 'active')
     template_name = "project/product/edit.html"
