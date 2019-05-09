@@ -20,30 +20,31 @@ class OrderAdd(CheckDealerMixin, View):
         try:
             with transaction.atomic():
 
-                # sipariş kaydını oluşturalım
-                new_order = Order(dealer_id=self.role_id, order_cancelled=False, order_transfered=False)
-                new_order.save()
+                cart = Cart(request)
+                new_order = {}
+                for distributor_id in cart.distributors.keys():
+                    # sipariş kaydını oluşturalım
+                    new_order[distributor_id] = Order(distributor_id=distributor_id, dealer_id=self.role_id, order_cancelled=False, order_transfered=False)
+                    new_order[distributor_id].save()
 
                 # shopping karttaki ürünleri sipariş kaydına ekleyelim
-                # Ürünler işlem yapan bayi tarafından alınabilmi kontrol edilmesi lazım.
+                # Ürünler işlem yapan bayi tarafından alınabilirmi kontrol edilmesi lazım.
                 # Bayiler sadece yetki verilen distibütörlerin ürünlerini alabilmeli.
                 dealer = Dealer.objects.prefetch_related('distributors').get(pk=self.role_id)
                 distributor_list = dealer.distributors.values_list('id', flat=True)
-
-                cart = Cart(request)
 
                 for item in cart:
                     product = Product.objects.get(pk=item['id'])
 
                     # ürünün distribütörü bayiye yetki vermişmi bakalım
                     # vermediyse hata verelim.
-                    if product.distributor_id not in distributor_list:
+                    if product.distributor_id not in cart.distributors or product.distributor_id not in distributor_list:
                         permission_error_message = "%s ürünün sahibi satım alımı için size yetki verrmemiş. " \
                                                    "Ürün listenizden çıkartıldı." % (item['name'])
                         raise PermissionDenied(permission_error_message)
 
                     # sipariş edilen ürünleri ekleyelim
-                    order_item = OrderItem(order=new_order, product=product, item_count=item['quantity'],
+                    order_item = OrderItem(order=new_order[product.distributor_id], product=product, item_count=item['quantity'],
                                            item_price=item['price'])
                     order_item.save()
 
@@ -67,7 +68,7 @@ class OrderAdd(CheckDealerMixin, View):
                 messages.success(self.request, self.success_message)
 
                 # detail-order sayfasına yönlendirelim
-                return redirect(reverse('project:detail-order', kwargs={"pk": new_order.id}))
+                return redirect(reverse('project:list-order', kwargs={"pk": new_order.id}))
 
         # eğer stok yeterli değilse hatayı yakalayalım
         except ValidationError as e:

@@ -1,6 +1,6 @@
 from django.views.generic import CreateView
-from django.contrib.auth.mixins import PermissionRequiredMixin, UserPassesTestMixin
-from project.models import Dealer
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from project.models import Dealer, Distributor
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from stocks.mixins import CheckDistributorMixin
@@ -24,4 +24,10 @@ class DealerCreateView(CheckDistributorMixin, PermissionRequiredMixin, SuccessMe
 
         return response
 
+    def get_context_data(self, **kwargs):
+        context = super(DealerCreateView, self).get_context_data(**kwargs)
 
+        distributor = Distributor.objects.prefetch_related('staff').get(pk=self.role_id)
+
+        context['form'].fields['author'].queryset = distributor.staff.all()
+        return context

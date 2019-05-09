@@ -1,0 +1,26 @@
+{%  extends 'project/layout/base.html' %}
+
+{% block top %}
+    <div class="jumbotron">
+        <h4>
+            <a href="{% url 'project:list-dealer' %}">Bayiler</a> -> Bayi İlişkilendir : {{ request.session.role_name }}
+        </h4>
+    </div>
+{% endblock %}
+
+{%  block content %}
+     <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+          <p>
+            {{ field.label_tag }}<br>
+            {{ field }}
+
+            {% for error in field.errors %}
+              <p style="color: red">{{ error }}</p>
+            {% endfor %}
+          </p>
+        {% endfor %}
+        <button type="submit">Bayi Ekle</button>
+      </form>
+{% endblock %}

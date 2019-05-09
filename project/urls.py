@@ -10,6 +10,7 @@ urlpatterns = [
     path('dealer/edit/<int:pk>/', views.DealerUpdateView.as_view(), name='edit-dealer'),
     path('dealer/delete/<int:pk>/', views.DealerDeleteView.as_view(), name='delete-dealer'),
     path('dealer/list/', views.DealerListView.as_view(), name='list-dealer'),
+    path('dealer/attach/', views.DealerRelationView.as_view(), name='attach-dealer'),
 
     # ürün yönetimi sayfaları
     path('product/create/', views.ProductCreateView.as_view(), name='create-product'),

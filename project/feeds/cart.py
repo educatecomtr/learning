@@ -19,6 +19,8 @@ class TryIter:
 # Bunun için add, remove ve clear metodlarını oluşturalım. İçerini daha sonra dolduracağız.
 class Cart(object):
 
+    distributors = {}
+
     # Shopping Cartımızı sessionda tutacağız.
     # Bu nedenle kart çağırıldığında daha önce bu kart için bir session oluşturulmuşmu kontrol edelim.
     # Ürünleri tutacağımız session adı shopping_cart olsun.
@@ -42,15 +44,23 @@ class Cart(object):
     # Session kaydını gerçekleştirelim.
     def add(self, product, quantity=1):
         product_id = str(product.id)
+        distributor_id = str(product.distributor_id)
 
         if product_id not in self.cart:
             if product.stock_count < quantity:
                 return False
 
+            if product.distributor_id not in self.distributors:
+
+                self.distributors[distributor_id] = 1;
+
             self.cart[product_id] = {'id': product.id, 'quantity': quantity, 'price': product.price, 'name': product.name}
         else:
             if product.stock_count < self.cart[product_id]['quantity'] + quantity:
                 return False
+
+            if product.distributor_id not in self.distributors:
+                self.distributors[distributor_id] += 1;
 
             self.cart[product_id]['quantity'] += quantity
 
@@ -66,13 +76,21 @@ class Cart(object):
     def remove(self, product):
 
         product_id = str(product.id)
+        distributor_id = str(product.distributor_id)
 
         if product_id in self.cart:
+
+            if self.distributors[distributor_id] > 1:
+                self.distributors[distributor_id] -= -1
+            else:
+                del self.distributors[distributor_id]
+
             del self.cart[product_id]
             self.save()
 
     # Kartı temizlemek için tüm session bilgisini silelim.
     def clear(self):
+        self.distributors = {}
         del self.session['shopping_cart']
         # self.session.modified = True
 

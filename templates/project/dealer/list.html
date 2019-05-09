@@ -16,7 +16,10 @@
 {% endblock %}
 
 {%  block content %}
-    <div style="margin-bottom: 15px;text-align: right"><a href="{% url 'project:create-dealer' %}" class="btn btn-primary">Bayi Ekle</a></div>
+    <div style="margin-bottom: 15px;text-align: right">
+        <a href="{% url 'project:create-dealer' %}" class="btn btn-primary">Bayi Ekle</a>
+        <a href="{% url 'project:attach-dealer' %}" class="btn btn-primary">Bayi İlişkilendir</a>
+    </div>
 
     <table class="table table-striped">
       <thead>

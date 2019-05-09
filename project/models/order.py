@@ -1,6 +1,7 @@
 from django.db import models
 from .product import Product
 from .dealer import Dealer
+from .distributor import Distributor
 
 
 class Order(models.Model):
@@ -9,6 +10,7 @@ class Order(models.Model):
     order_cancelled = models.BooleanField(default=False, verbose_name='Sipariş İptal Edildi')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Sipariş Tarihi')
     updated = models.DateTimeField(auto_now=True, verbose_name='Sipariş Güncellenme Tarihi')
+    distributor = models.ForeignKey(Distributor, on_delete=models.CASCADE, verbose_name='Distribütör')
 
     class Meta:
         verbose_name = 'Sipariş'
