@@ -1,0 +1,94 @@
+{%  extends 'project/layout/base.html' %}
+
+{% block top %}
+    <div class="jumbotron">
+        <h4>
+            <a href="{% url 'project:list-order' %}">Sipariş Listesi</a>
+        </h4>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{%  block content %}
+    {% if order_list %}
+        <form method="get" action="">
+        <div class="row">
+            <div class="col p-1">
+                <select class="form-control" name="distributor">
+                    <option label="Distribütör ..."></option>
+                    {% for distributor in distributors %}
+                        <option value="{{ distributor.id }}" {% if distributor.id == filter_distributor %}selected{% endif %}>{{ distributor.name }}</option>
+                    {%  endfor %}
+                </select>
+            </div>
+            <div class="col p-1">
+                <select class="form-control" name="status">
+                    <option label="Sipariş Durumu ..."></option>
+                    <option value="1" {% if '1' == filter_status %}selected{% endif %}>Hazırlanıyor</option>
+                    <option value="2" {% if '2' == filter_status %}selected{% endif %}>İptal Edildi</option>
+                    <option value="3" {% if '3' == filter_status %}selected{% endif %}>Tamamlandı</option>
+                </select>
+            </div>
+            <div class="col p-1">
+                <input class="btn btn-success" type="submit" value="Filtrele">
+            </div>
+        </div>
+
+    </form>
+    <br><br>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Sipariş ID</th>
+          <th scope="col">Distribütör</th>
+          <th scope="col">Sipariş Tarihi</th>
+          <th scope="col">Sipariş Durumu</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in order_list %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>SIP-{{ order.id }}</td>
+                <td>{{ order.distributor }}</td>
+                <td>{{ order.created }}</td>
+                <td>
+                    {% if order.transferred %}
+                        Tamamlandı
+                    {% else %}
+                        {% if order.cancelled %}
+                            İptal Edildi
+                        {% else %}
+                            Hazırlanıyor
+                        {% endif %}
+                    {% endif %}
+                </td>
+            <td>
+                {% if not order.transferred %}
+                    {% if not order.cancelled %}
+                        <a href="{% url 'project:cancel-order' order.id %}" class="btn btn-danger">Siparişi İptal Et</a>
+                    {% endif %}
+                {% endif %}
+                <a href="{% url 'project:detail-order' order.id %}" class="btn btn-primary">Detay</a>
+            </td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+        <br><br>
+
+    {% else %}
+        Henüz sipariş verilmemiş.
+    {% endif %}
+
+
+
+{% endblock %}

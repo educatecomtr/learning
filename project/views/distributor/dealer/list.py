@@ -7,7 +7,7 @@ from stocks.mixins import CheckDistributorMixin
 # bayi listeleme
 class DealerListView(CheckDistributorMixin, PermissionRequiredMixin, ListView):
     model = Dealer
-    template_name = "project/dealer/list.html"
+    template_name = "project/distributor/dealer/list.html"
     context_object_name = 'dealer_list'
     ordering = ['-created']
     permission_required = ('project.manage_dealer',)

@@ -1,4 +1,4 @@
-from django.views.generic import UpdateView
+from django.views.generic import DeleteView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from project.models import Dealer
 from django.urls import reverse_lazy
@@ -6,11 +6,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 from stocks.mixins import CheckDealerDistributorMixin
 
 
-# bayi düzenleme
-class DealerUpdateView(CheckDealerDistributorMixin, SuccessMessageMixin, PermissionRequiredMixin, UpdateView):
+# bayi silme
+class DealerDeleteView(CheckDealerDistributorMixin, SuccessMessageMixin, PermissionRequiredMixin, DeleteView):
     model = Dealer
-    fields = ('name', 'content', 'author', 'address', 'phone', 'email', 'active')
-    template_name = "project/dealer/edit.html"
+    template_name = "project/distributor/dealer/delete.html"
     success_url = reverse_lazy('project:list-dealer')
-    success_message = "%(name)s başarıyla düzenlendi."
+    success_message = "%(name)s başarıyla silindi."
     permission_required = ('project.manage_dealer',)

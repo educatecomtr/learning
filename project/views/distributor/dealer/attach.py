@@ -13,7 +13,7 @@ class DealerRelationView(CheckDistributorMixin, View):
     def get(self, request):
         form = DealerRelationForm()
 
-        return render(request, 'project/dealer/attach.html', {'form': form})
+        return render(request, 'project/distributor/dealer/attach.html', {'form': form})
 
     def post(self, request):
         form = DealerRelationForm(request.POST)
@@ -30,4 +30,4 @@ class DealerRelationView(CheckDistributorMixin, View):
 
             return redirect('project:list-dealer')
 
-        return render(request, 'project/dealer/attach.html', {'form': form})
+        return render(request, 'project/distributor/dealer/attach.html', {'form': form})

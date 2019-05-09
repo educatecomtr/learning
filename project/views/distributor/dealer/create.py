@@ -10,7 +10,7 @@ from stocks.mixins import CheckDistributorMixin
 class DealerCreateView(CheckDistributorMixin, PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = Dealer
     fields = ('name', 'content', 'author', 'address', 'phone', 'email', 'active')
-    template_name = "project/dealer/create.html"
+    template_name = "project/distributor/dealer/create.html"
     success_url = reverse_lazy('project:list-dealer')
     success_message = "%(name)s başarıyla oluşturuldu."
     permission_required = ('project.manage_dealer',)

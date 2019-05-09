@@ -42,7 +42,6 @@ class OrderListView(CheckDealerMixin, ListView):
         if distributor:
             context['filter_distributor'] = int(distributor)
 
-        status = self.request.GET.get('status', False)
         context['filter_status'] = self.request.GET.get('status', False)
 
         return context

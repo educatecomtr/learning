@@ -1,0 +1,17 @@
+{%  extends 'project/layout/base.html' %}
+
+{% block top %}
+    <div class="jumbotron">
+        <h4>
+            <a href="{% url 'project:list-order' %}">Sipariş Listesi</a> -> Sipariş Sil -> Sipariş ID : {{ object }}
+        </h4>
+    </div>
+{% endblock %}
+
+{%  block content %}
+<form method="post">
+    {% csrf_token %}
+   Silmek istediğinize emin misiniz ?
+    <input type="submit" value="Sil" />
+</form>
+{% endblock %}

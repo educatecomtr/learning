@@ -37,6 +37,12 @@ urlpatterns = [
     # sipariş sayfaları | distributor
 
 
+    # sipariş sayfaları | distributor
+    path('distributor/order/list/', views.DistributorOrderListView.as_view(), name='distributor-list-order'),
+    path('distributor/order/detail/<int:pk>/', views.DistributorOrderDetailView.as_view(), name='distributor-detail-order'),
+    path('distributor/order/approve/<int:pk>/', views.DistributorOrderApproveView.as_view(), name='distributor-create-order'),
+    path('distributor/order/cancel/<int:pk>/', views.DistributorOrderDeleteView.as_view(), name='distributor-cancel-order'),
+
 
 ]
 
