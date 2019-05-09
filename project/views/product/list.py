@@ -11,7 +11,7 @@ class ProductListView(CheckDistributorMixin, PermissionRequiredMixin, ListView):
     context_object_name = 'product_list'
     ordering = ['-created']
     permission_required = ('project.manage_product',)
-    paginate_by = 1
+    paginate_by = 10
 
     def get_queryset(self):
         distributor_id = self.request.session.get('role_id')
