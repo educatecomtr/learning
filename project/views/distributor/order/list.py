@@ -4,6 +4,7 @@ from stocks.mixins import CheckDistributorMixin
 
 
 # Sipariş onaylama
+
 class DistributorOrderListView(CheckDistributorMixin, ListView):
     model = Order
     template_name = "project/distributor/order/list.html"
