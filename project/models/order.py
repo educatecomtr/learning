@@ -10,7 +10,7 @@ class Order(models.Model):
     order_cancelled = models.BooleanField(default=False, verbose_name='Sipariş İptal Edildi')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Sipariş Tarihi')
     updated = models.DateTimeField(auto_now=True, verbose_name='Sipariş Güncellenme Tarihi')
-    distributor = models.ForeignKey(Distributor, on_delete=models.CASCADE, verbose_name='Distribütör')
+    distributor = models.ForeignKey(Distributor, on_delete=models.CASCADE, verbose_name='Distribütör', related_name='received_orders', related_query_name='received_order')
 
     class Meta:
         verbose_name = 'Sipariş'
@@ -22,7 +22,7 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Sipariş', related_name='ordered_items')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Sipariş', related_name='ordered_items', related_query_name='ordered_item')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Ürün')
     item_count = models.PositiveIntegerField(verbose_name='Ürün Adedi')
     item_price = models.FloatField(verbose_name='Ürün Fiyatı')

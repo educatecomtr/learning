@@ -23,11 +23,9 @@ class DistributorOrderListView(CheckDistributorMixin, ListView):
         if status == '1':
             queryset = queryset.filter(order_transfered=False, order_cancelled=False)
         elif status == '2':
-            queryset = queryset.filter(order_transfered=False, order_cancelled=True)
-        elif status == '3':
             queryset = queryset.filter(order_transfered=True)
 
-        return queryset.order_by('-created').all()
+        return queryset.filter(distributor_id=self.role_id).order_by('-created').all()
 
     def get_context_data(self, **kwargs):
         context = super(DistributorOrderListView, self).get_context_data(**kwargs)

@@ -1,2 +1,3 @@
 from .order import DistributorOrderApproveView, DistributorOrderDeleteView, DistributorOrderDetailView, DistributorOrderListView
 from .dealer import DealerCreateView, DealerUpdateView, DealerListView, DealerDeleteView, DealerRelationView
+from .payment import DistributorPaymentApproveView, DistributorPaymentListView, DistributorPaymentDealerView

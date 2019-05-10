@@ -1,6 +1,6 @@
 from django.views.generic import CreateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from project.models import Dealer, Distributor
+from project.models import Dealer
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from stocks.mixins import CheckDistributorMixin

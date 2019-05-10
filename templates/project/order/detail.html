@@ -17,10 +17,10 @@
 
 {%  block content %}
     <br><br>
-    Sipariş Durumu : {% if order.transferred %} Gönderildi {% else %} Hazırlanıyor {% endif %}
+    Sipariş Durumu : {% if order.order_transfered %} Gönderildi {% else %} Hazırlanıyor {% endif %}
     <br><br>
 
-     {% if not order.transferred %}
+     {% if not order.order_transfered %}
      <a href="{% url 'project:cancel-order' order.id %}" class="btn btn-danger">Siparişi İptal Et</a>
     <br><br>
     {% endif %}

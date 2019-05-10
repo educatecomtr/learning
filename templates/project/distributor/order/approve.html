@@ -1,0 +1,18 @@
+{%  extends 'project/layout/base.html' %}
+
+{% block top %}
+    <div class="jumbotron">
+        <h4>
+            <a href="{% url 'project:distributor-list-order' %}">Sipariş Listesi</a> -> Sipariş Onayla -> Sipariş ID : {{ object }}
+        </h4>
+    </div>
+{% endblock %}
+
+{%  block content %}
+     <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+         <input type="hidden" name="order_transfered" value=true>
+        Siparişi onaylamak istediğinize emin misiniz ?
+        <input type="submit" value="Siparişi Onayla" />
+     </form>
+{% endblock %}

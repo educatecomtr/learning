@@ -3,7 +3,7 @@
 {% block top %}
     <div class="jumbotron">
         <h4>
-            <a href="{% url 'project:list-order' %}">Sipariş Listesi</a>
+            <a href="{% url 'project:list-payment' %}">Ödeme</a> -> Ödeme Listesi : {{ request.session.role_name }}
         </h4>
     </div>
     {% if messages %}
@@ -16,7 +16,7 @@
 {% endblock %}
 
 {%  block content %}
-    <form method="get" action="">
+        <form method="get" action="">
         <div class="row">
             <div class="col p-1">
                 <select class="form-control" name="distributor">
@@ -29,8 +29,6 @@
             <div class="col p-1">
                 <select class="form-control" name="status">
                     <option label="Sipariş Durumu ..."></option>
-                    <option value="1" {% if '1' == filter_status %}selected{% endif %}>Hazırlanıyor</option>
-                    <option value="2" {% if '2' == filter_status %}selected{% endif %}>Tamamlandı</option>
                 </select>
             </div>
             <div class="col p-1">
@@ -40,44 +38,31 @@
 
     </form>
     <br><br>
-    {% if order_list %}
+
+    <div style="margin-bottom: 15px;text-align: right">
+        <a href="{% url 'project:create-payment' %}" class="btn btn-primary">Ödeme Ekle</a>
+    </div>
+
     <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Sipariş ID</th>
-          <th scope="col">Distribütör</th>
-          <th scope="col">Sipariş Tarihi</th>
-          <th scope="col">Sipariş Durumu</th>
-          <th></th>
+          <th scope="col">Distribütör Adı</th>
+          <th scope="col">Ödeme Tutarı</th>
+          <th scope="col">Ödeme Durumu</th>
+          <th scope="col">Ödeme Tarihi</th>
         </tr>
       </thead>
       <tbody>
-        {% for order in order_list %}
+        {% for payment in payment_list %}
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td>SIP-{{ order.id }}</td>
-                <td>{{ order.distributor }}</td>
-                <td>{{ order.created }}</td>
-                <td>
-                    {% if order.order_transfered %}Tamamlandı{% else %}Hazırlanıyor{% endif %}
-                </td>
-            <td>
-                {% if not order.order_transfered %}
-                        <a href="{% url 'project:cancel-order' order.id %}" class="btn btn-danger">Siparişi İptal Et</a>
-                {% endif %}
-                <a href="{% url 'project:detail-order' order.id %}" class="btn btn-primary">Detay</a>
-            </td>
+                <td> <a href="{% url 'project:detail-payment' payment.distributor.id %}">{{ payment.distributor }}</a></td>
+                <td>{{ payment.amount }}</td>
+                <td>{{ payment.payment_accepted }}</td>
+                <td>{{ payment.created }}</td>
             </tr>
-        {% endfor %}
+      {% endfor %}
       </tbody>
     </table>
-        <br><br>
-
-    {% else %}
-        Henüz sipariş verilmemiş.
-    {% endif %}
-
-
-
 {% endblock %}

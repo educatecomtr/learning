@@ -17,10 +17,13 @@
 
 {%  block content %}
     <br><br>
-    Sipariş Durumu : {% if order.transferred %} Gönderildi {% else %} Hazırlanıyor {% endif %}
+    Sipariş Durumu : {% if order.order_transfered %} Gönderildi {% else %} Hazırlanıyor {% endif %}
+
+    {% if not order.order_transfered %}
     <br><br>
      <a href="{% url 'project:distributor-cancel-order' order.id %}" class="btn btn-danger">Siparişi İptal Et</a>
-     {% if not order.transferred %}<a href="{% url 'project:distributor-approve-order' order.id %}" class="btn btn-danger">Siparişi Onay</a>{% endif %}
+    <a href="{% url 'project:distributor-approve-order' order.id %}" class="btn btn-danger">Siparişi Onay</a>
+    {% endif %}
     <br><br>
 
 

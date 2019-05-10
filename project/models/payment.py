@@ -13,7 +13,7 @@ class Payment(models.Model):
     )
 
     dealer = models.ForeignKey(Dealer, on_delete=models.CASCADE, verbose_name='Bayi')
-    distributor = models.ForeignKey(Distributor, on_delete=models.CASCADE, verbose_name='Distribütör')
+    distributor = models.ForeignKey(Distributor, on_delete=models.CASCADE, verbose_name='Distribütör', related_name='received_payments', related_query_name='received_payment')
     amount = models.FloatField(verbose_name='Miktar')
     payment_accepted = models.CharField(max_length=1, choices=PAYMENT_CHOICES, default='B', verbose_name='Ödeme Kabülü')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Ödeme Tarihi')

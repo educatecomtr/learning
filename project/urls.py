@@ -39,10 +39,10 @@ urlpatterns = [
     path('distributor/order/cancel/<int:pk>/', views.DistributorOrderDeleteView.as_view(), name='distributor-cancel-order'),
 
     # ödeme sayfaları | dealer
-
-
-
-
+    path('payment/list/', views.PaymentListView.as_view(), name='list-payment'),
+    path('payment/create/', views.PaymentCreateView.as_view(), name='create-payment'),
+    path('payment/distributor/<int:pk>/', views.PaymentDistributorDetailView.as_view(), name='detail-payment'),
+    path('payment/detail/', views.PaymentDistributorListView.as_view(), name='list-detail-payment'),
 
 ]
 

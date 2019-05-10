@@ -22,8 +22,6 @@ class OrderListView(CheckDealerMixin, ListView):
         if status == '1':
             queryset = queryset.filter(order_transfered=False, order_cancelled=False)
         elif status == '2':
-            queryset = queryset.filter(order_transfered=False, order_cancelled=True)
-        elif status == '3':
             queryset = queryset.filter(order_transfered=True)
 
         return queryset.order_by('-created').all()

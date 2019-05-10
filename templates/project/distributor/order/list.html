@@ -16,11 +16,10 @@
 {% endblock %}
 
 {%  block content %}
-    {% if order_list %}
-        <form method="get" action="">
+    <form method="get" action="">
         <div class="row">
             <div class="col p-1">
-                <select class="form-control" name="distributor">
+                <select class="form-control" name="dealer">
                     <option label="Bayi ..."></option>
                     {% for dealer in dealers %}
                         <option value="{{ dealer.id }}" {% if dealer.id == filter_dealer %}selected{% endif %}>{{ dealer.name }}</option>
@@ -31,8 +30,7 @@
                 <select class="form-control" name="status">
                     <option label="Sipariş Durumu ..."></option>
                     <option value="1" {% if '1' == filter_status %}selected{% endif %}>Hazırlanıyor</option>
-                    <option value="2" {% if '2' == filter_status %}selected{% endif %}>İptal Edildi</option>
-                    <option value="3" {% if '3' == filter_status %}selected{% endif %}>Tamamlandı</option>
+                    <option value="2" {% if '2' == filter_status %}selected{% endif %}>Tamamlandı</option>
                 </select>
             </div>
             <div class="col p-1">
@@ -42,6 +40,9 @@
 
     </form>
     <br><br>
+
+    {% if order_list %}
+
     <table class="table table-striped">
       <thead>
         <tr>
@@ -61,21 +62,13 @@
                 <td>{{ order.distributor }}</td>
                 <td>{{ order.created }}</td>
                 <td>
-                    {% if order.transferred %}
-                        Tamamlandı
-                    {% else %}
-                        {% if order.cancelled %}
-                            İptal Edildi
-                        {% else %}
-                            Hazırlanıyor
-                        {% endif %}
-                    {% endif %}
+                    {% if order.order_transfered %}Tamamlandı{% else %}Hazırlanıyor{% endif %}
                 </td>
             <td>
-                {% if not order.transferred %}
-                        <a href="{% url 'project:distributor-approve-order' order.id %}" class="btn btn-danger">Siparişi Onayla</a>
+                {% if not order.order_transfered %}
+                    <a href="{% url 'project:distributor-cancel-order' order.id %}" class="btn btn-danger">Siparişi İptal Et</a>
+                    <a href="{% url 'project:distributor-approve-order' order.id %}" class="btn btn-danger">Siparişi Onayla</a>
                 {% endif %}
-                <a href="{% url 'project:distributor-cancel-order' order.id %}" class="btn btn-danger">Siparişi İptal Et</a>
                 <a href="{% url 'project:distributor-detail-order' order.id %}" class="btn btn-primary">Detay</a>
             </td>
             </tr>

@@ -1,0 +1,45 @@
+{%  extends 'project/layout/base.html' %}
+
+{% block top %}
+    <div class="jumbotron">
+        <h4>
+            <a href="{% url 'project:list-payment' %}">Ödeme</a> -> Ödeme Detayı : {{ distributor }}
+        </h4>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{%  block content %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">ADET</th>
+          <th scope="col">TUTAR TL</th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr>
+                <th scope="row">TOPLAM SİPARİŞ</th>
+                <td>{{ order_count }}</td>
+                <td>{{ order_amount }}</td>
+            </tr>
+            <tr>
+                <th scope="row">TOPLAM ÖDEME</th>
+                <td>{{ payment_count }}</td>
+                <td>{{ payment_amount }}</td>
+            </tr>
+            <tr>
+                <th scope="row">BAKİYE</th>
+                <td>-</td>
+                <td>{{ total_amount }}</td>
+            </tr>
+      </tbody>
+    </table>
+{% endblock %}
