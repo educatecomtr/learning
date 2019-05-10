@@ -28,6 +28,6 @@ class DealerRelationView(CheckDistributorMixin, View):
             else:
                 messages.error(self.request, self.error_message)
 
-            return redirect('project:list-dealer')
+            return redirect('project:distributor-list-dealer')
 
         return render(request, 'project/distributor/dealer/attach.html', {'form': form})

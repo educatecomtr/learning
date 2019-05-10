@@ -3,7 +3,7 @@
 {% block top %}
     <div class="jumbotron">
         <h4>
-            <a href="{% url 'project:list-order' %}">Sipariş Listesi</a>
+            <a href="{% url 'project:distributor-list-order' %}">Sipariş Listesi</a>
         </h4>
     </div>
     {% if messages %}
@@ -21,9 +21,9 @@
         <div class="row">
             <div class="col p-1">
                 <select class="form-control" name="distributor">
-                    <option label="Distribütör ..."></option>
-                    {% for distributor in distributors %}
-                        <option value="{{ distributor.id }}" {% if distributor.id == filter_distributor %}selected{% endif %}>{{ distributor.name }}</option>
+                    <option label="Bayi ..."></option>
+                    {% for dealer in dealers %}
+                        <option value="{{ dealer.id }}" {% if dealer.id == filter_dealer %}selected{% endif %}>{{ dealer.name }}</option>
                     {%  endfor %}
                 </select>
             </div>
@@ -73,11 +73,10 @@
                 </td>
             <td>
                 {% if not order.transferred %}
-                    {% if not order.cancelled %}
-                        <a href="{% url 'project:cancel-order' order.id %}" class="btn btn-danger">Siparişi İptal Et</a>
-                    {% endif %}
+                        <a href="{% url 'project:distributor-approve-order' order.id %}" class="btn btn-danger">Siparişi Onayla</a>
                 {% endif %}
-                <a href="{% url 'project:detail-order' order.id %}" class="btn btn-primary">Detay</a>
+                <a href="{% url 'project:distributor-cancel-order' order.id %}" class="btn btn-danger">Siparişi İptal Et</a>
+                <a href="{% url 'project:distributor-detail-order' order.id %}" class="btn btn-primary">Detay</a>
             </td>
             </tr>
         {% endfor %}
@@ -86,7 +85,7 @@
         <br><br>
 
     {% else %}
-        Henüz sipariş verilmemiş.
+        Henüz alınan sipariş bulunamadı.
     {% endif %}
 
 

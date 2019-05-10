@@ -3,7 +3,7 @@
 {% block top %}
     <div class="jumbotron">
         <h4>
-            <a href="{% url 'project:list-order' %}">Sipariş Listesi</a> -> Sipariş ID: {{ order.id }}
+            <a href="{% url 'project:distributor-list-order' %}">Sipariş Listesi</a> -> Sipariş ID: {{ order.id }}
         </h4>
     </div>
     {% if messages %}
@@ -19,7 +19,8 @@
     <br><br>
     Sipariş Durumu : {% if order.transferred %} Gönderildi {% else %} Hazırlanıyor {% endif %}
     <br><br>
-     <a href="{% url 'project:cancel-order' order.id %}" class="btn btn-danger">Siparişi İptal Et</a>
+     <a href="{% url 'project:distributor-cancel-order' order.id %}" class="btn btn-danger">Siparişi İptal Et</a>
+     {% if not order.transferred %}<a href="{% url 'project:distributor-approve-order' order.id %}" class="btn btn-danger">Siparişi Onay</a>{% endif %}
     <br><br>
 
 

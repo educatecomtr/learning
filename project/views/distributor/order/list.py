@@ -31,7 +31,7 @@ class DistributorOrderListView(CheckDistributorMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super(DistributorOrderListView, self).get_context_data(**kwargs)
 
-        dealers = Dealer.objects.filter(distributors__id=self.role_id)
+        dealers = Dealer.objects.filter(distributor__id=self.role_id)
 
         context['dealers'] = dealers
 

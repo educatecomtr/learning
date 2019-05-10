@@ -17,8 +17,8 @@
 
 {%  block content %}
     <div style="margin-bottom: 15px;text-align: right">
-        <a href="{% url 'project:create-dealer' %}" class="btn btn-primary">Bayi Ekle</a>
-        <a href="{% url 'project:attach-dealer' %}" class="btn btn-primary">Bayi İlişkilendir</a>
+        <a href="{% url 'project:distributor-create-dealer' %}" class="btn btn-primary">Bayi Ekle</a>
+        <a href="{% url 'project:distributor-attach-dealer' %}" class="btn btn-primary">Bayi İlişkilendir</a>
     </div>
 
     <table class="table table-striped">
@@ -39,8 +39,8 @@
                 <td>{{ dealer.email }}</td>
                 <td>{{ dealer.phone }}</td>
                 <td style="text-align: right">
-                    <a href="{% url 'project:delete-dealer' dealer.pk %}" class="btn btn-danger btn-sm">Sil</a>
-                    <a href="{% url 'project:edit-dealer' dealer.pk %}" class="btn btn-warning btn-sm">Düzenle</a>
+                    <a href="{% url 'project:distributor-delete-dealer' dealer.pk %}" class="btn btn-danger btn-sm">Sil</a>
+                    <a href="{% url 'project:distributor-edit-dealer' dealer.pk %}" class="btn btn-warning btn-sm">Düzenle</a>
                 </td>
             </tr>
       {% endfor %}

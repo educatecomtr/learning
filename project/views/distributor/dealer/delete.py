@@ -10,6 +10,6 @@ from stocks.mixins import CheckDealerDistributorMixin
 class DealerDeleteView(CheckDealerDistributorMixin, SuccessMessageMixin, PermissionRequiredMixin, DeleteView):
     model = Dealer
     template_name = "project/distributor/dealer/delete.html"
-    success_url = reverse_lazy('project:list-dealer')
+    success_url = reverse_lazy('project:distributor-list-dealer')
     success_message = "%(name)s başarıyla silindi."
     permission_required = ('project.manage_dealer',)

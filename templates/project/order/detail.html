@@ -19,9 +19,11 @@
     <br><br>
     Sipariş Durumu : {% if order.transferred %} Gönderildi {% else %} Hazırlanıyor {% endif %}
     <br><br>
+
+     {% if not order.transferred %}
      <a href="{% url 'project:cancel-order' order.id %}" class="btn btn-danger">Siparişi İptal Et</a>
     <br><br>
-
+    {% endif %}
 
     {% if products %}
         Toplam {{ products|length }} siparişi verildi. Sipariş tutarı : {{ products.get_total_price }} TL.

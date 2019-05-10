@@ -6,11 +6,11 @@ app_name = 'project'
 urlpatterns = [
 
     # bayi yönetimi sayfaları | distributor
-    path('dealer/create/', views.DealerCreateView.as_view(), name='create-dealer'),
-    path('dealer/edit/<int:pk>/', views.DealerUpdateView.as_view(), name='edit-dealer'),
-    path('dealer/delete/<int:pk>/', views.DealerDeleteView.as_view(), name='delete-dealer'),
-    path('dealer/list/', views.DealerListView.as_view(), name='list-dealer'),
-    path('dealer/attach/', views.DealerRelationView.as_view(), name='attach-dealer'),
+    path('distributor/dealer/create/', views.DealerCreateView.as_view(), name='distributor-create-dealer'),
+    path('distributor/dealer/edit/<int:pk>/', views.DealerUpdateView.as_view(), name='distributor-edit-dealer'),
+    path('distributor/dealer/delete/<int:pk>/', views.DealerDeleteView.as_view(), name='distributor-delete-dealer'),
+    path('distributor/dealer/list/', views.DealerListView.as_view(), name='distributor-list-dealer'),
+    path('distributor/dealer/attach/', views.DealerRelationView.as_view(), name='distributor-attach-dealer'),
 
     # ürün yönetimi sayfaları | distributor
     path('product/create/', views.ProductCreateView.as_view(), name='create-product'),
@@ -32,16 +32,16 @@ urlpatterns = [
     path('order/create/', views.OrderAddView.as_view(), name='create-order'),
     path('order/cancel/<int:pk>/', views.OrderDeleteView.as_view(), name='cancel-order'),
 
-    # ödeme sayfaları | dealer
-
-    # sipariş sayfaları | distributor
-
-
     # sipariş sayfaları | distributor
     path('distributor/order/list/', views.DistributorOrderListView.as_view(), name='distributor-list-order'),
     path('distributor/order/detail/<int:pk>/', views.DistributorOrderDetailView.as_view(), name='distributor-detail-order'),
-    path('distributor/order/approve/<int:pk>/', views.DistributorOrderApproveView.as_view(), name='distributor-create-order'),
+    path('distributor/order/approve/<int:pk>/', views.DistributorOrderApproveView.as_view(), name='distributor-approve-order'),
     path('distributor/order/cancel/<int:pk>/', views.DistributorOrderDeleteView.as_view(), name='distributor-cancel-order'),
+
+    # ödeme sayfaları | dealer
+
+
+
 
 
 ]
