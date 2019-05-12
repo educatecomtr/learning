@@ -12,7 +12,7 @@
 {%  block content %}
     <div class="jumbotron">
         <div class="row w-100">
-            {% if request.user.is_superuser %}
+            {% if  request.user.id == distributor.author_id  %}
             <div class="col-md-4">
                 <div class="card border-danger p-3">
                     <div class="card border-danger text-danger p-3 my-card" >
@@ -25,7 +25,7 @@
             </div>
             {% endif %}
 
-            {% if perms.project.manage_payment %}
+            {% if perms.project.manage_payment or request.user.id == distributor.author_id %}
             <div class="col-md-4">
                 <div class="card border-info p-3">
                     <div class="card border-info text-info p-3 my-card">
@@ -38,7 +38,7 @@
             </div>
             {% endif %}
 
-            {% if perms.project.manage_order %}
+            {% if perms.project.manage_order or request.user.id == distributor.author_id %}
             <div class="col-md-4">
                 <div class="card border-success p-3">
                     <div class="card border-success text-success p-3 my-card">
@@ -54,7 +54,7 @@
         <br>
         <div class="row w-100">
 
-            {% if perms.project.manage_product %}
+            {% if perms.project.manage_product or request.user.id == distributor.author_id %}
             <div class="col-md-4">
                 <div class="card border-info mx-sm-1 p-3">
                     <div class="card border-info shadow text-info p-3 my-card" >
@@ -67,7 +67,7 @@
             </div>
             {% endif %}
 
-            {% if perms.project.manage_dealer  %}
+            {% if perms.project.manage_dealer or request.user.id == distributor.author_id %}
             <div class="col-md-4">
                 <div class="card border-warning mx-sm-1 p-3">
                     <div class="card border-warning shadow text-warning p-3 my-card">

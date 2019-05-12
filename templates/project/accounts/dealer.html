@@ -12,6 +12,8 @@
 {%  block content %}
     <div class="jumbotron">
         <div class="row w-100">
+
+            {% if request.user.id == dealer.author_id %}
             <div class="col-md-4">
                 <div class="card border-danger p-3">
                     <div class="card border-danger text-danger p-3 my-card" >
@@ -22,7 +24,9 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
 
+            {% if perms.project.manage_payment or request.user.id == dealer.author_id %}
             <div class="col-md-4">
                 <div class="card border-info p-3">
                     <div class="card border-info text-info p-3 my-card">
@@ -33,6 +37,9 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
+
+            {% if perms.project.manage_order or request.user.id == dealer.author_id %}
             <div class="col-md-4">
                 <div class="card border-success p-3">
                     <div class="card border-success text-success p-3 my-card">
@@ -43,9 +50,12 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
 
          </div>
         <br>
+
+        {% if perms.project.manage_order or request.user.id == dealer.author_id %}
         <div class="row w-100">
             <div class="col-md-4">
                 <div class="card border-danger p-3">
@@ -58,6 +68,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 
 {% endblock %}
