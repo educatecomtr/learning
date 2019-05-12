@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from stocks.mixins import SlugMixin
+from project.mixins import SlugMixin
 
 
 class Company(SlugMixin):

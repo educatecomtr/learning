@@ -1,6 +1,6 @@
 from django.views.generic import ListView
 from project.models import Payment, Dealer
-from stocks.mixins import CheckDistributorMixin
+from project.mixins import CheckDistributorMixin
 
 
 # Sipariş listeleme

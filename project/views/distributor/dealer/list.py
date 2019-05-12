@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from project.models import Dealer
-from stocks.mixins import CheckDistributorMixin
+from project.mixins import CheckDistributorMixin
 
 
 # bayi listeleme

@@ -1,6 +1,6 @@
 from django.views.generic import DetailView
 from project.models import Distributor, Dealer
-from stocks.mixins import CheckDealerMixin
+from project.mixins import CheckDealerMixin
 from django.db.models import F, Sum, FloatField, Count, Value
 from django.db.models.functions import Coalesce
 from django.shortcuts import redirect

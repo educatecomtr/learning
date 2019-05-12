@@ -1,12 +1,12 @@
 from django.views import View
-from django.shortcuts import redirect, reverse
+from django.shortcuts import redirect
 from project.feeds import Cart
 from project.models import Product, Order, OrderItem, Dealer
 from django.contrib import messages
 from django.db import transaction
 from django.db import IntegrityError
 from django.core.exceptions import ValidationError, PermissionDenied
-from stocks.mixins import CheckDealerMixin
+from project.mixins import CheckDealerMixin
 
 
 # Sipariş oluşturma

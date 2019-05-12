@@ -1,7 +1,7 @@
 from django.views.generic import DeleteView
 from project.models import Order
 from project.feeds import OrderObject
-from stocks.mixins import CheckDealerObjectMixin
+from project.mixins import CheckDealerObjectMixin
 
 
 # Sipariş detay görüntüleme

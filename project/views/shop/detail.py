@@ -1,6 +1,6 @@
 from django.views.generic import DetailView
 from project.models import Product
-from stocks.mixins import CheckDealerMixin
+from project.mixins import CheckDealerMixin
 from project.forms import AddProductToShoppingCartForm
 
 

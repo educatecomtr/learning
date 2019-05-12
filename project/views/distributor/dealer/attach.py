@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from project.models import Distributor
 from django.contrib import messages
 from project.forms import DealerRelationForm
-from stocks.mixins import CheckDistributorMixin
+from project.mixins import CheckDistributorMixin
 
 
 class DealerRelationView(CheckDistributorMixin, View):

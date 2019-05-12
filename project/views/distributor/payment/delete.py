@@ -1,5 +1,5 @@
 from django.views.generic import UpdateView
-from stocks.mixins import CheckDistributorObjectMixin
+from project.mixins import CheckDistributorObjectMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from project.models import Payment
 from django.urls import reverse_lazy

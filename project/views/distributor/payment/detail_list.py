@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 from project.models import Dealer
-from stocks.mixins import CheckDistributorMixin
-from django.db.models import F, Sum, FloatField, Q, Value
+from project.mixins import CheckDistributorMixin
+from django.db.models import F, Sum, FloatField, Value
 from django.db.models.functions import Coalesce
 
 

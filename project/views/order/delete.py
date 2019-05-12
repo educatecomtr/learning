@@ -1,7 +1,7 @@
 from django.views.generic import DeleteView
 from project.models import Order
 from django.urls import reverse_lazy
-from stocks.mixins import CheckDealerObjectMixin
+from project.mixins import CheckDealerObjectMixin
 from django.contrib.messages.views import SuccessMessageMixin
 
 

@@ -1,8 +1,8 @@
 from django.views.generic import CreateView
-from project.models import Payment, Dealer
+from project.models import Payment
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
-from stocks.mixins import CheckDealerMixin
+from project.mixins import CheckDealerMixin
 
 
 # bayi ekleme

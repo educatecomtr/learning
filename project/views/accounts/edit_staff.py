@@ -4,7 +4,7 @@ from project.forms import StaffUpdateForm
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
-from stocks.helpers import check_user_management_access
+from project.helpers import check_user_management_access
 
 
 # personel düzenleme

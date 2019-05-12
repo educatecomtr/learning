@@ -1,5 +1,5 @@
 from django.db import models
-from stocks.mixins import SlugMixin
+from project.mixins import SlugMixin
 from .brand import Brand
 from .distributor import Distributor
 

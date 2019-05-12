@@ -1,5 +1,5 @@
 from django.views.generic import DeleteView
-from stocks.mixins import CheckDealerObjectMixin
+from project.mixins import CheckDealerObjectMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from project.models import Payment
 from django.urls import reverse_lazy

@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
-from stocks.helpers import check_user_management_access
+from project.helpers import check_user_management_access
 
 
 # personel silme
