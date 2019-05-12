@@ -1,0 +1,16 @@
+    <ul class="navbar-nav mr-auto">
+
+        {% if not user.is_authenticated %}
+          <li class="nav-item {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'login' %}">Üye Girişi</a>
+          </li>
+        {% else %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Üye İşlemleri</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="{% url 'password_change' %}">Şifre Değiştir</a>
+              <a class="dropdown-item" href="{% url 'logout' %}">Çıkış</a>
+            </div>
+          </li>
+        {% endif %}
+    </ul>
