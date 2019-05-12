@@ -5,4 +5,6 @@ class StocksConfig(AppConfig):
     name = 'stocks'  # proje adı ile aynı olmalıdır
 
     def ready(self):
-        import stocks.signals # sinyallerin çalışmasını sağlar.
+        import stocks.templatetags.tags
+        import stocks.signals.user_management
+

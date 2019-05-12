@@ -44,5 +44,10 @@ urlpatterns = [
     path('payment/distributor/<int:pk>/', views.PaymentDistributorDetailView.as_view(), name='detail-payment'),
     path('payment/detail/', views.PaymentDistributorListView.as_view(), name='list-detail-payment'),
 
+    # ödeme sayfaları | distributor
+    path('distributor/payment/list/', views.DistributorPaymentListView.as_view(), name='distributor-list-payment'),
+    path('distributor/payment/approve/<int:pk>/', views.DistributorPaymentApproveView.as_view(), name='distributor-approve-payment'),
+    path('distributor/payment/dealer/<int:pk>/', views.DistributorPaymentDealerDetailView.as_view(), name='distributor-detail-payment'),
+    path('distributor/payment/detail/', views.DistributorPaymentDealerListView.as_view(), name='distributor-list-detail-payment'),
 ]
 
