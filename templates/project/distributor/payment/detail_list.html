@@ -3,7 +3,7 @@
 {% block top %}
     <div class="jumbotron">
         <h4>
-            <a href="{% url 'project:list-payment' %}">Ödeme</a> -> Borç / Alacak Listesi : {{ request.session.role_name }}
+            <a href="{% url 'project:distributor-list-payment' %}">Ödeme</a> -> Borç / Alacak Listesi : {{ request.session.role_name }}
         </h4>
     </div>
     {% if messages %}
@@ -16,31 +16,26 @@
 {% endblock %}
 
 {%  block content %}
-    {{ payment_list }}
 
-    <div style="margin-bottom: 15px;text-align: right">
-        <a href="{% url 'project:create-payment' %}" class="btn btn-primary">Ödeme Ekle</a>
-    </div>
 
     <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Distribütör Adı</th>
+          <th scope="col">Bayi Adı</th>
           <th scope="col">Toplam Sipariş Tutarı (TL)</th>
           <th scope="col">Toplam Ödeme Tutarı (TL)</th>
           <th scope="col">Bakiye Tutarı (TL)</th>
         </tr>
       </thead>
       <tbody>
-        {% for distributor in distributor_list %}
+        {% for dealer in dealer_list %}
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td><a href="{% url 'project:detail-payment' distributor.id %}">{{ distributor.name }}</a></td>
-                <td>{{ distributor.total_order_amount }}</td>
-                <td>{{ distributor.total_payment_amount}}</td>
-                <td>{{ distributor.total_payment_amount|subtract:distributor.total_order_amount}}</td>
-                <td></td>
+                <td><a href="{% url 'project:distributor-detail-payment' dealer.id %}">{{ dealer.name }}</a></td>
+                <td>{{ dealer.total_order_amount }}</td>
+                <td>{{ dealer.total_payment_amount}}</td>
+                <td>{{ dealer.total_payment_amount|subtract:dealer.total_order_amount}}</td>
             </tr>
       {% endfor %}
       </tbody>

@@ -3,24 +3,17 @@
 {% block top %}
     <div class="jumbotron">
         <h4>
-            <a href="{% url 'project:list-payment' %}">Ödeme</a> -> Ödeme Yap : {{ request.session.role_name }}
+            <a href="{% url 'project:list-payment' %}">Ödeme</a> -> Ödeme Kabülü : {{ request.session.role_name }}
         </h4>
     </div>
 {% endblock %}
 
 {%  block content %}
-     <form method="post">
+     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% for field in form %}
-          <p>
-            {{ field.label_tag }}<br>
-            {{ field }}
-
-            {% for error in field.errors %}
-              <p style="color: red">{{ error }}</p>
-            {% endfor %}
-          </p>
-        {% endfor %}
-        <button type="submit">Ekle</button>
-      </form>
+         <input type="hidden" name="payment_accepted" value='K'>
+        Ödemeyi onaylamak istediğinize emin misiniz ?
+        <input type="submit" value="Ödemeyi Onayla" />
+     </form>
 {% endblock %}
+

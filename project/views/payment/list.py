@@ -35,7 +35,6 @@ class PaymentListView(CheckDealerMixin, ListView):
         context['status'] = (
             ('K', 'KABUL EDİLDİ'),
             ('R', 'RED EDİLDİ'),
-            ('I', 'İPTAL EDİLDİ'),
             ('B', 'BEKLEMEDE')
         )
         context['filter_status'] = status if status else False

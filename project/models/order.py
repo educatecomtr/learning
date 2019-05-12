@@ -5,7 +5,7 @@ from .distributor import Distributor
 
 
 class Order(models.Model):
-    dealer = models.ForeignKey(Dealer, on_delete=models.CASCADE, verbose_name='Bayi')
+    dealer = models.ForeignKey(Dealer, on_delete=models.CASCADE, verbose_name='Bayi', related_name='given_orders', related_query_name='given_order')
     order_transfered = models.BooleanField(default=False, verbose_name='Nakliye Tamamlandı')
     order_cancelled = models.BooleanField(default=False, verbose_name='Sipariş İptal Edildi')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Sipariş Tarihi')

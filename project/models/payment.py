@@ -8,11 +8,10 @@ class Payment(models.Model):
     PAYMENT_CHOICES = (
         ('K', 'KABUL EDİLDİ'),
         ('R', 'RED EDİLDİ'),
-        ('I', 'İPTAL EDİLDİ'),
         ('B', 'BEKLEMEDE')
     )
 
-    dealer = models.ForeignKey(Dealer, on_delete=models.CASCADE, verbose_name='Bayi')
+    dealer = models.ForeignKey(Dealer, on_delete=models.CASCADE, verbose_name='Bayi', related_name='given_payments', related_query_name='given_payment')
     distributor = models.ForeignKey(Distributor, on_delete=models.CASCADE, verbose_name='Distribütör', related_name='received_payments', related_query_name='received_payment')
     amount = models.FloatField(verbose_name='Miktar')
     payment_accepted = models.CharField(max_length=1, choices=PAYMENT_CHOICES, default='B', verbose_name='Ödeme Kabülü')

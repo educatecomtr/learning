@@ -3,7 +3,7 @@
 {% block top %}
     <div class="jumbotron">
         <h4>
-            <a href="{% url 'project:list-payment' %}">Ödeme</a> -> Ödeme Detayı : {{ distributor_name }}
+            <a href="{% url 'project:list-payment' %}">Ödeme</a> -> Ödeme Detayı : {{ distributor.name }}
         </h4>
     </div>
     {% if messages %}
@@ -42,8 +42,18 @@
             </tr>
             <tr>
                 <th scope="row">BAKİYE</th>
-                <td>-</td>
-                <td>{{  distributor.total_payment_amount|subtract:distributor.total_order_amount }}</td>
+                <th>-</th>
+                <th>{{  distributor.total_payment_amount|subtract:distributor.total_order_amount }}</th>
+            </tr>
+            <tr>
+                <th scope="row">ONAYLANMAMIŞ ÖDEME</th>
+                <td>{{  distributor.waiting_payment_count }}</td>
+                <td>{{  distributor.waiting_payment_amount }}</td>
+            </tr>
+            <tr>
+                <th scope="row">ONAYLANMAMIŞ SİPARİŞ</th>
+                <td>{{  distributor.waiting_order_count }}</td>
+                <td>{{  distributor.waiting_order_amount }}</td>
             </tr>
       </tbody>
     </table>

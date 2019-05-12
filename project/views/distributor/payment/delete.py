@@ -7,12 +7,12 @@ from django.shortcuts import redirect
 
 
 # Sipariş silme
-class DistributorPaymentApproveView(CheckDistributorObjectMixin, SuccessMessageMixin, UpdateView):
+class DistributorPaymentDeleteView(CheckDistributorObjectMixin, SuccessMessageMixin, UpdateView):
     model = Payment
     fields = ['payment_accepted']
-    template_name = 'project/distributor/payment/approve.html'
+    template_name = 'project/distributor/payment/delete.html'
     success_url = reverse_lazy('project:distributor-list-payment')
-    success_message = "Ödeme başarıyla onaylandı."
+    success_message = "Ödeme başarıyla reddedildi."
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -20,7 +20,7 @@ class DistributorPaymentApproveView(CheckDistributorObjectMixin, SuccessMessageM
         if self.object.payment_accepted != 'B':
             return redirect('project:distributor-list-payment')
 
-        return super(DistributorPaymentApproveView, self).get(request, *args, **kwargs)
+        return super(DistributorPaymentDeleteView, self).get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -28,4 +28,5 @@ class DistributorPaymentApproveView(CheckDistributorObjectMixin, SuccessMessageM
         if self.object.payment_accepted != 'B':
             return redirect('project:distributor-list-payment')
 
-        return super(DistributorPaymentApproveView, self).post(request, *args, **kwargs)
+        return super(DistributorPaymentDeleteView, self).post(request, *args, **kwargs)
+

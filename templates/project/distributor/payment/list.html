@@ -3,7 +3,7 @@
 {% block top %}
     <div class="jumbotron">
         <h4>
-            <a href="{% url 'project:list-payment' %}">Ödeme</a> -> Ödeme Listesi : {{ request.session.role_name }}
+            <a href="{% url 'project:distributor-list-payment' %}">Ödeme</a> -> Ödeme Listesi : {{ request.session.role_name }}
         </h4>
     </div>
     {% if messages %}
@@ -15,33 +15,35 @@
     {% endif %}
 {% endblock %}
 
+
 {%  block content %}
-        <form method="get" action="">
+    <form method="get" action="">
         <div class="row">
             <div class="col p-1">
-                <select class="form-control" name="distributor">
-                    <option label="Distribütör ..."></option>
-                    {% for distributor in distributors %}
-                        <option value="{{ distributor.id }}" {% if distributor.id == filter_distributor %}selected{% endif %}>{{ distributor.name }}</option>
+                <select class="form-control" name="dealer">
+                    <option label="Bayi ..."></option>
+                    {% for dealer in dealers %}
+                        <option value="{{ dealer.id }}" {% if dealer.id == filter_dealer %}selected{% endif %}>{{ dealer.name }}</option>
                     {%  endfor %}
                 </select>
             </div>
             <div class="col p-1">
                 <select class="form-control" name="status">
                     <option label="Sipariş Durumu ..."></option>
+                    {% for key, value in status %}
+                        <option value="{{ key }}" {% if key == filter_status %}selected{% endif %}>{{ value }}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="col p-1">
                 <input class="btn btn-success" type="submit" value="Filtrele">
             </div>
         </div>
-
     </form>
     <br><br>
 
     <div style="margin-bottom: 15px;text-align: right">
-        <a href="{% url 'project:create-payment' %}" class="btn btn-primary">Ödeme Ekle</a>
-        <a href="{% url 'project:list-detail-payment' %}" class="btn btn-primary">Borç / Alacak Listesi</a>
+        <a href="{% url 'project:distributor-list-detail-payment' %}" class="btn btn-primary">Borç / Alacak Listesi</a>
 
     </div>
 
@@ -49,20 +51,27 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Distribütör Adı</th>
+          <th scope="col">Bayi Adı</th>
           <th scope="col">Ödeme Tutarı</th>
           <th scope="col">Ödeme Durumu</th>
           <th scope="col">Ödeme Tarihi</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {% for payment in payment_list %}
             <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td> <a href="{% url 'project:detail-payment' payment.distributor.id %}">{{ payment.distributor }}</a></td>
+                <td> <a href="{% url 'project:distributor-detail-payment' payment.dealer.id %}">{{ payment.dealer }}</a></td>
                 <td>{{ payment.amount }}</td>
-                <td>{{ payment.payment_accepted }}</td>
+                <td>{{ payment.get_payment_accepted_display }}</td>
                 <td>{{ payment.created }}</td>
+                <td>
+                    {% if payment.payment_accepted == 'B' %}
+                    <a href="{% url 'project:distributor-approve-payment' payment.id %}" class="btn btn-primary">Onayla</a>
+                    <a href="{% url 'project:distributor-cancel-payment' payment.id %}" class="btn btn-primary">Reddet</a>
+                    {% endif %}
+                </td>
             </tr>
       {% endfor %}
       </tbody>

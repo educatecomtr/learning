@@ -3,7 +3,7 @@
 {% block top %}
     <div class="jumbotron">
         <h4>
-            <a href="{% url 'project:list-payment' %}">Ödeme</a> -> Ödeme Detayı : {{ distributor_name }}
+            <a href="{% url 'project:distributor-list-payment' %}">Ödeme</a> -> Ödeme Detayı : {{ dealer.name }}
         </h4>
     </div>
     {% if messages %}
@@ -18,8 +18,7 @@
 {%  block content %}
 
     <div style="margin-bottom: 15px;text-align: right">
-        <a href="{% url 'project:create-payment' %}" class="btn btn-primary">Ödeme Ekle</a>
-        <a href="{% url 'project:list-detail-payment' %}" class="btn btn-primary">Borç / Alacak Listesi</a>
+        <a href="{% url 'project:distributor-list-detail-payment' %}" class="btn btn-primary">Borç / Alacak Listesi</a>
     </div>
     <table class="table table-striped">
       <thead>
@@ -32,19 +31,31 @@
       <tbody>
             <tr>
                 <th scope="row">TOPLAM SİPARİŞ</th>
-                <td>{{ distributor.total_order_count }}</td>
-                <td>{{ distributor.total_order_amount }}</td>
+                <td>{{ dealer.total_order_count }}</td>
+                <td>{{ dealer.total_order_amount }}</td>
             </tr>
             <tr>
                 <th scope="row">TOPLAM ÖDEME</th>
-                <td>{{ distributor.total_payment_count }}</td>
-                <td>{{ distributor.total_payment_amount }}</td>
+                <td>{{ dealer.total_payment_count }}</td>
+                <td>{{ dealer.total_payment_amount }}</td>
             </tr>
             <tr>
                 <th scope="row">BAKİYE</th>
                 <td>-</td>
-                <td>{{  distributor.total_payment_amount|subtract:distributor.total_order_amount }}</td>
+                <td>{{  dealer.total_payment_amount|subtract:dealer.total_order_amount }}</td>
             </tr>
+                  <tr>
+                <th scope="row">ONAYLANMAMIŞ ÖDEME</th>
+                <td>{{  dealer.waiting_payment_count }}</td>
+                <td>{{  dealer.waiting_payment_amount }}</td>
+            </tr>
+            <tr>
+                <th scope="row">ONAYLANMAMIŞ SİPARİŞ</th>
+                <td>{{  dealer.waiting_order_count }}</td>
+                <td>{{  dealer.waiting_order_amount }}</td>
+            </tr>
+
+
       </tbody>
     </table>
 {% endblock %}

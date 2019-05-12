@@ -1,8 +1,9 @@
 from django.views.generic import DetailView
-from project.models import Distributor
+from project.models import Distributor, Dealer
 from stocks.mixins import CheckDealerMixin
-from django.db.models import F, Sum, FloatField, Count, Q, Value
+from django.db.models import F, Sum, FloatField, Count, Value
 from django.db.models.functions import Coalesce
+from django.shortcuts import redirect
 
 
 # Sipariş detay görüntüleme
@@ -12,35 +13,78 @@ class PaymentDistributorDetailView(CheckDealerMixin, DetailView):
     template_name = 'project/payment/detail.html'
 
     def get_object(self):
-        queryset = Distributor.objects.prefetch_related('received_payments', 'received_orders').filter(pk=self.kwargs['pk']).aggregate(
-                total_payment_amount=Coalesce(Sum(
-                    'received_payment__amount',
-                    only=Q(received_payment__payment_accepted='K'),
+
+        # Bayiler sadece kendi distribütörlerine ait ödeme detaylarını görebilmeli.
+        # Kontrol edelim.
+        dealer = Dealer.objects.prefetch_related('distributors').get(pk=self.role_id)
+        distributor_list = dealer.distributors.values_list('id', flat=True)
+
+        if self.kwargs['pk'] not in distributor_list:
+            return redirect('role-list')
+
+        instance = Distributor.objects.get(pk=self.kwargs['pk'])
+
+        rp = instance.received_payments.filter(payment_accepted='K', dealer_id=self.role_id).aggregate(
+            payment_amount=Coalesce(
+                Sum(
+                    'amount',
                     output_field=FloatField()
-                ), Value(0)),
-                total_payment_count=Count(
-                    'received_payment__amount',
-                    only=Q(received_payment__payment_accepted='K'),
-                    output_field=FloatField()
-                ),
-                total_order_amount=Coalesce(Sum(
-                    F('received_order__ordered_item__item_price') * F('received_order__ordered_item__item_count'),
-                    only=Q(received_order__order_transfered=True),
-                    output_field=FloatField()
-                ), Value(0)),
-                total_order_count=Count(
-                    'received_order__ordered_item',
-                    only=Q(received_order__order_transfered=True)
-                ),
+                ), Value(0)
+            ),
+            payment_count=Count(
+                'id',
             )
+        )
 
-        return queryset
+        instance.total_payment_amount = rp['payment_amount']
+        instance.total_payment_count = rp['payment_count']
 
-    def get_context_data(self, **kwargs):
-        context = super(PaymentDistributorDetailView, self).get_context_data(**kwargs)
-        query = Distributor.objects.get(pk=self.kwargs['pk'])
-        context['distributor_name'] = query.name
-        return context
+        rs = instance.received_payments.filter(payment_accepted='B', dealer_id=self.role_id).aggregate(
+            payment_amount=Coalesce(
+                Sum(
+                    'amount',
+                    output_field=FloatField()
+                ), Value(0)
+            ),
+            payment_count=Count(
+                'id',
+            )
+        )
+
+        instance.waiting_payment_amount = rs['payment_amount']
+        instance.waiting_payment_count = rs['payment_count']
+
+        ro = instance.received_orders.filter(order_transfered=True, dealer_id=self.role_id).aggregate(
+            order_amount=Coalesce(
+                Sum(
+                    F('ordered_item__item_price') * F('ordered_item__item_count'),
+                    output_field=FloatField()
+                ), Value(0)
+            ),
+            order_count=Count(
+                'id',
+            )
+        )
+
+        instance.total_order_amount = ro['order_amount']
+        instance.total_order_count = ro['order_count']
+
+        rb = instance.received_orders.filter(order_transfered=False, dealer_id=self.role_id).aggregate(
+            order_amount=Coalesce(
+                Sum(
+                    F('ordered_item__item_price') * F('ordered_item__item_count'),
+                    output_field=FloatField()
+                ), Value(0)
+            ),
+            order_count=Count(
+                'id',
+            )
+        )
+
+        instance.waiting_order_amount = rb['order_amount']
+        instance.waiting_order_count = rb['order_count']
+
+        return instance
 
 
 

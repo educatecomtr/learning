@@ -29,6 +29,9 @@
             <div class="col p-1">
                 <select class="form-control" name="status">
                     <option label="Sipariş Durumu ..."></option>
+                    {% for key, value in status %}
+                        <option value="{{ key }}" {% if key == filter_status %}selected{% endif %}>{{ value }}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="col p-1">
@@ -53,6 +56,7 @@
           <th scope="col">Ödeme Tutarı</th>
           <th scope="col">Ödeme Durumu</th>
           <th scope="col">Ödeme Tarihi</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -61,8 +65,13 @@
                 <th scope="row">{{ forloop.counter }}</th>
                 <td> <a href="{% url 'project:detail-payment' payment.distributor.id %}">{{ payment.distributor }}</a></td>
                 <td>{{ payment.amount }}</td>
-                <td>{{ payment.payment_accepted }}</td>
+                <td>{{ payment.get_payment_accepted_display }}</td>
                 <td>{{ payment.created }}</td>
+                <td>
+                    {% if payment.payment_accepted == 'B' %}
+                    <a href="{% url 'project:cancel-payment' payment.id %}" class="btn btn-primary">İptal Et</a>
+                    {% endif %}
+                </td>
             </tr>
       {% endfor %}
       </tbody>
