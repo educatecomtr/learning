@@ -7,7 +7,7 @@ from project.mixins import CheckDistributorMixin
 # ürün listeleme
 class ProductListView(CheckDistributorMixin, PermissionRequiredMixin, ListView):
     model = Product
-    template_name = "project/product/list.html"
+    template_name = "project/distributor/product/list.html"
     context_object_name = 'product_list'
     ordering = ['-created']
     permission_required = ('project.manage_product',)

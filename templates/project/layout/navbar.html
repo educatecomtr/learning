@@ -1,16 +1,64 @@
-    <ul class="navbar-nav mr-auto">
-
-        {% if not user.is_authenticated %}
-          <li class="nav-item {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
+<ul class="navbar-nav mr-auto">
+    {% if not user.is_authenticated %}
+        <li class="nav-item {% if request.resolver_match.url_name == 'login' %}active{% endif %}">
             <a class="nav-link" href="{% url 'login' %}">Üye Girişi</a>
-          </li>
-        {% else %}
-          <li class="nav-item dropdown">
+        </li>
+    {% else %}
+        <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Üye İşlemleri</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="{% url 'password_change' %}">Şifre Değiştir</a>
-              <a class="dropdown-item" href="{% url 'logout' %}">Çıkış</a>
+                <a class="dropdown-item" href="{% url 'password_change' %}">Şifre Değiştir</a>
+                <a class="dropdown-item" href="{% url 'logout' %}">Çıkış</a>
             </div>
-          </li>
+        </li>
+
+        {% if request.session.role_page == 'distributor' %}
+
+            {% if perms.project.manage_dealer or navbar.author %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Bayiler</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="{% url 'project:distributor-list-dealer' %}">Bayi Listele</a>
+                        <a class="dropdown-item" href="{% url 'project:distributor-create-dealer' %}">Bayi Ekle</a>
+                        <a class="dropdown-item" href="{% url 'project:distributor-attach-dealer' %}">Bayi İlişkilendir</a>
+                    </div>
+                </li>
+            {% endif %}
+
+
+            {% if perms.project.manage_product or navbar.author %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ürünler</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="{% url 'project:distributor-list-dealer' %}">Ürün Listele</a>
+                        <a class="dropdown-item" href="{% url 'project:distributor-create-dealer' %}">Ürün Ekle</a>
+                    </div>
+                </li>
+            {% endif %}
+
+            {% if perms.project.manage_payment or navbar.author %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ödeme</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="{% url 'project:distributor-list-dealer' %}">Ürün Listele</a>
+                        <a class="dropdown-item" href="{% url 'project:distributor-create-dealer' %}">Ürün Ekle</a>
+                    </div>
+                </li>
+            {% endif %}
+
+            {% if perms.project.manage_order or navbar.author %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ürünler</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="{% url 'project:distributor-list-dealer' %}">Ürün Listele</a>
+                        <a class="dropdown-item" href="{% url 'project:distributor-create-dealer' %}">Ürün Ekle</a>
+                    </div>
+                </li>
+            {% endif %}
+
+        {% elif request.session_role_page == 'dealer' %}
+
+
         {% endif %}
-    </ul>
+    {% endif %}
+</ul>

@@ -3,7 +3,7 @@
 {% block top %}
     <div class="jumbotron">
         <h4>
-            <a href="{% url 'project:list-product' %}">Ürünler</a> -> Ürün Sil : {{ request.session.role_name }}
+            <a href="{% url 'project:distributor-list-product' %}">Ürünler</a> -> Ürün Sil : {{ request.session.role_name }}
         </h4>
     </div>
 {% endblock %}

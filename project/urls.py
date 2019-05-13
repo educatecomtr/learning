@@ -4,11 +4,6 @@ from . import views
 app_name = 'project'
 
 urlpatterns = [
-    # ürün yönetimi sayfaları | distributor
-    path('product/list/', views.ProductListView.as_view(), name='list-product'),
-    path('product/create/', views.ProductCreateView.as_view(), name='create-product'),
-    path('product/edit/<int:pk>/', views.ProductUpdateView.as_view(), name='edit-product'),
-    path('product/delete/<int:pk>/', views.ProductDeleteView.as_view(), name='delete-product'),
 
     # shop sayfaları | dealer
     path('shop/list/', views.ShopListView.as_view(), name='list-shop'),
@@ -50,4 +45,10 @@ urlpatterns = [
     path('distributor/payment/approve/<int:pk>/', views.DistributorPaymentApproveView.as_view(), name='distributor-approve-payment'),
     path('distributor/payment/delete/<int:pk>/', views.DistributorPaymentDeleteView.as_view(), name='distributor-cancel-payment'),
     path('distributor/payment/dealer/<int:pk>/', views.DistributorPaymentDealerDetailView.as_view(), name='distributor-detail-payment'),
+
+    # ürün yönetimi sayfaları | distributor
+    path('distributor/product/list/', views.ProductListView.as_view(), name='distributor-list-product'),
+    path('distributor/product/create/', views.ProductCreateView.as_view(), name='distributor-create-product'),
+    path('distributor/product/edit/<int:pk>/', views.ProductUpdateView.as_view(), name='distributor-edit-product'),
+    path('distributor/product/delete/<int:pk>/', views.ProductDeleteView.as_view(), name='distributor-delete-product'),
 ]

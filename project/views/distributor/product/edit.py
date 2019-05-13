@@ -10,8 +10,8 @@ from project.mixins import CheckDistributorObjectMixin
 class ProductUpdateView(CheckDistributorObjectMixin, SuccessMessageMixin, PermissionRequiredMixin, UpdateView):
     model = Product
     fields = ('name', 'content', 'cover', 'brand', 'price', 'stock_count', 'active')
-    template_name = "project/product/edit.html"
-    success_url = reverse_lazy('project:list-product')
+    template_name = "project/distributor/product/edit.html"
+    success_url = reverse_lazy('project:distributor-list-product')
     success_message = "%(name)s başarıyla düzenlendi."
     permission_required = ('project.manage_product',)
 

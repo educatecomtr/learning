@@ -10,8 +10,8 @@ from project.mixins import CheckDistributorMixin
 class ProductCreateView(CheckDistributorMixin, PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = Product
     fields = ('name', 'content', 'cover', 'brand', 'price', 'stock_count', 'active')
-    template_name = "project/product/create.html"
-    success_url = reverse_lazy('project:list-product')
+    template_name = "project/distributor/product/create.html"
+    success_url = reverse_lazy('project:distributor-list-product')
     success_message = "%(name)s başarıyla oluşturuldu."
     permission_required = ('project.manage_product',)
 

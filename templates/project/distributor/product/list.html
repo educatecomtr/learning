@@ -3,7 +3,7 @@
 {% block top %}
     <div class="jumbotron">
         <h4>
-            <a href="{% url 'project:list-product' %}">Ürünler</a> : {{ request.session.role_name }}
+            <a href="{% url 'project:distributor-list-product' %}">Ürünler</a> : {{ request.session.role_name }}
         </h4>
     </div>
     {% if messages %}
@@ -16,7 +16,7 @@
 {% endblock %}
 
 {%  block content %}
-    <div style="margin-bottom: 15px;text-align: right"><a href="{% url 'project:create-product' %}" class="btn btn-primary">Ürün Ekle</a></div>
+    <div style="margin-bottom: 15px;text-align: right"><a href="{% url 'project:distributor-create-product' %}" class="btn btn-primary">Ürün Ekle</a></div>
 
     <table class="table table-striped">
       <thead>
@@ -38,8 +38,8 @@
                 <td>{{ product.price }}</td>
                 <td>{{ product.stock_count }}</td>
                 <td style="text-align: right">
-                    <a href="{% url 'project:delete-product' product.pk %}" class="btn btn-danger btn-sm">Sil</a>
-                    <a href="{% url 'project:edit-product' product.pk %}" class="btn btn-warning btn-sm">Düzenle</a>
+                    <a href="{% url 'project:distributor-delete-product' product.pk %}" class="btn btn-danger btn-sm">Sil</a>
+                    <a href="{% url 'project:distributor-edit-product' product.pk %}" class="btn btn-warning btn-sm">Düzenle</a>
                 </td>
             </tr>
       {% endfor %}
