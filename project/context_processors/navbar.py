@@ -22,5 +22,7 @@ def get_navbar(request):
 
 
     return {
-        "navbar": {}
+        "navbar": {
+            'author': True
+        }
     }
