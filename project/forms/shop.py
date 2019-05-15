@@ -13,3 +13,6 @@ class AddProductToShoppingCartForm(forms.Form):
     # Değer olarak birden beşe kadar sayı oluşturalın bir liste yapalım ve choices argümanı olarak atayalım.
     quantity = forms.TypedChoiceField(choices=PRODUCT_QUANTITY, coerce=int)
 
+
+class ProductSearchForm(forms.Form):
+    name = forms.CharField(label='Arama')
