@@ -30,7 +30,6 @@ Bayiler :
 
 
 
-
 Ben kursu anlatmaya başlamadan önce sizlerin zamanını fazla almamak ve daha akıcı bir anlatım olması nedeniyle
 uygulamayı öncelikle kendim yazdım. Şimdi bu uygulama üzerinden kontrol ederek yapılacak listesini çıkartalım.
 
