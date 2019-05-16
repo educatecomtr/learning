@@ -85,7 +85,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sipariş Yönetimi</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown01">
-                            <a class="dropdown-item" href="{% url 'project:list-payment' %}">Sipariş Listele</a>
+                            <a class="dropdown-item" href="{% url 'project:list-order' %}">Sipariş Listele</a>
                             <a class="dropdown-item" href="{% url 'project:list-shop' %}">Ürün Listele</a>
                             <a class="dropdown-item" href="{% url 'project:detail-cart' %}">Sepeti Listele</a>
                             <a class="dropdown-item" href="{% url 'project:clear-cart' %}">Sepeti Temizle</a>
@@ -96,9 +96,14 @@
             {% endif %}
         {% endif %}
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="arama kelimesi..." aria-label="Search">
+
+   {% if request.session.role_page == 'dealer' %}
+    <form action="{% url 'project:list-shop' %}" class="form-inline my-2 my-lg-0">
+        {% csrf_token %}
+
+      <input class="form-control mr-sm-2" type="text" placeholder="arama kelimesi..." name="name" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ara</button>
     </form>
+  {% endif %}
   </div>
 </nav>
