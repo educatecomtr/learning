@@ -62,3 +62,4 @@ class MyView(PermissionRequiredMixin, View):
     permission_required = 'learning.add_product'
     # çoğul yetki için
     permission_required = ('learning.add_product', 'learning.view_product')
+
