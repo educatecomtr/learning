@@ -3,8 +3,6 @@ from django.shortcuts import render
 from project.models import Dealer, Distributor
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.contrib.auth.models import User
-
 
 # rol seçme
 class RoleView(LoginRequiredMixin, View):
